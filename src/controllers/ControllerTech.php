@@ -7,7 +7,7 @@ require_once('src/models/ModelTech.php');
 require_once('src/models/ModelSession.php');
 require_once('src/models/ModelErrorManagement.php');
 require_once('src/config/config.php');
-require_once('src/config/mail.php');
+require_once('src/config/Mail.php');
 require_once('src/views/viewsTech/ViewsMail.php');
 
 
