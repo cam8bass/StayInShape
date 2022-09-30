@@ -86,7 +86,7 @@ class ModelUser extends Model
   {
     $statementSendActivationKey = $this->dbh->connectDb()->prepare("UPDATE club SET numActive=:activationKey WHERE idClub=$idClub");
     $statementSendActivationKey->bindValue(":activationKey", "activated");
-    $statementSendActivationKey->execute();
+    return $statementSendActivationKey->execute();
   }
 
   public function accountActivation($idClub)
@@ -108,7 +108,7 @@ class ModelUser extends Model
     return $this->imgPath . $newImgName;
   }
 
-  public function checkUserChangePassword(array $allInput):array 
+  public function checkUserChangePassword(array $allInput): array
   {
     $allInput = filter_input_array(INPUT_POST, [
       "newPassword" => FILTER_SANITIZE_SPECIAL_CHARS,
@@ -124,6 +124,4 @@ class ModelUser extends Model
     ]);
     return $newDescription['description'] ?? "";
   }
-
-
 }
