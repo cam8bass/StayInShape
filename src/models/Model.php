@@ -104,21 +104,23 @@ class Model
 
   public function createRandomPassword($length)
   {
-    do {
-      $comb = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@&=+*%!?";
-      $shfl = str_shuffle($comb);
-      $password = substr($shfl, 0, $length);
+      do {
+        $comb = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@=+*%!?";
+        $shfl = str_shuffle($comb);
+        $password = substr($shfl, 0, $length);
 
-      // Permet de vérifier qu'il y a un moins un caractère en Majuscules
-      $uppercase = preg_match('@[A-Z]@', $password);
-      // Permet de vérifier qu'il y a un moins un caractère en Minuscule
-      $lowercase = preg_match('@[a-z]@', $password);
-      // Permet de vérifier qu'il y a un moins un nombre 
-      $number = preg_match('@[0-9]@', $password);
-      // Permet de vérifier qu'il y a un caractère spécial
-      $specialCharacter = preg_match('/[\'\/~`\!@#%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/', $password);
-    } while (!$specialCharacter || !$number || !$lowercase || !$uppercase);
+        // Permet de vérifier qu'il y a un moins un caractère en Majuscules
+        $uppercase = preg_match('@[A-Z]@', $password);
+        // Permet de vérifier qu'il y a un moins un caractère en Minuscule
+        $lowercase = preg_match('@[a-z]@', $password);
+        // Permet de vérifier qu'il y a un moins un nombre 
+        $number = preg_match('@[0-9]@', $password);
+        // Permet de vérifier qu'il y a un caractère spécial
+        $specialCharacter = preg_match('/[\'\/~`\!@#%\^\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/', $password);
 
-    return $password;
+      } while (!$specialCharacter || !$number || !$lowercase || !$uppercase);
+
+      return $password;
+
   }
 }

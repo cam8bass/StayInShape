@@ -59,6 +59,7 @@ class Session
     // Permet de vérifier si le compte est pas désactivé et que l'adress email est valide ainsi que le mot de passe 
     $errorUserLogin = $this->errorManagement->checkErrorUserLogin($password, $user);
     $errorIfAdminAccount = $this->errorManagement->checkErrorIfAdminAccount($user);
+   
 
     if (empty(array_filter($errorTypeLogin, fn ($el) => $el !== '')) && empty(array_filter($errorUserLogin, fn ($el) => $el !== "")) && empty(array_filter($errorIfAdminAccount, fn ($el) => $el !== ""))) {
       $this->modelSession->loginUser($errorUserLogin, $user);

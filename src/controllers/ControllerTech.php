@@ -66,7 +66,6 @@ class Technician
       unset($_SESSION['createProfile']);
       // Permet de générer un mot de passe pour le compte;
       $passwordGenerated = $this->modelTech->createRandomPassword(12);
-
       $passwordHash = password_hash($passwordGenerated, PASSWORD_ARGON2I);
       if (password_verify($passwordGenerated, $passwordHash)) {
         // Permet d'ajouter le password généré au compte en cours de création
@@ -76,7 +75,6 @@ class Technician
         $idProfile = $this->modelTech->createUser($newPartner, "Partner");
         // Permet de remplir le profil du nouveau partenaire
         $this->modelTech->createPartner($idProfile, $newPartner);
-        // voir pour l'envoi d'email ??
         // Permet de générer la page success 
         require('src/views/ViewSuccessPage.php');
       }
@@ -119,7 +117,7 @@ class Technician
           // Permet de créer le fichier permission.json et de le remplir avec les permission 
           $idPermission = $this->modelTech->createPermissionsFile($clubPermissions) ?? time();
           // Permet de remplir le profil de l'utilisateur et de l'envoyer à la Bdd
-          $this->modelTech->createClub($idClub, $newClub, $idPermission,$activationKey);
+          $this->modelTech->createClub($idClub, $newClub, $idPermission, $activationKey);
           //  Récupère le nom des clubs déjà rattaché au partner parent
           $attachedClub = $this->modelTech->retrieveAttachedClubToPartner($profileParent['idPartner']);
           $idNewAttachedClub = $attachedClub['attachedClub'] === "" ? $idClub  : implode(',', [$attachedClub['attachedClub'], $idClub]);

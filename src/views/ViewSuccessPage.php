@@ -3,12 +3,12 @@
 if ($requestType === "copyPassword") {
   $title = "Création partenaire";
   $popupTitle = "Nouveau compte partenaire crée";
-  $popupText = "Le mot de passe de ce compte est $passwordGenerated";
+  $popupText = "Le mot de passe de ce compte $newPartner[email] est $passwordGenerated";
   $popupLinkAgree = "../../../index.php?status=on&action=home";
 } elseif ($requestType === "copyPasswordClub") {
   $title = "Création club";
   $popupTitle = "Nouveau compte club crée";
-  $popupText = "Le mot de passe de ce compte est $passwordGenerated , $messageMail";
+  $popupText = "Le mot de passe de ce compte $newClub[email] est $passwordGenerated , $messageMail";
   $popupLinkAgree = "../../../index.php?status=on&action=home";
 } elseif ($requestType === 'deletionError') {
   // Permet de remplir la page de confirmation de suppression de partenaire si le partenaire possède encore des clubs

@@ -134,7 +134,7 @@ class User
     $activationKey = $_GET['key'] ?? '';
     $validKey = $this->modelUser->retrieveActicationKey($idClub);
 
-    if ($validKey === $activationKey) {
+    if ($validKey['numActive'] === $activationKey) {
       $activation = $this->modelUser->sendActivation($idClub);
       if ($activation) {
         $this->modelUser->accountActivation($idClub);
