@@ -1,0 +1,1 @@
+## Permet de stocker les photos des utilisateurs.
