@@ -1,0 +1,53 @@
+@mixin googleFonts($font) {
+  @import url("https://fonts.googleapis.com/css2?family=#{$font}:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+}
+
+@include googleFonts("Lato");
+@include googleFonts("Quicksand");
+@include googleFonts("Cookie");
+
+@mixin boxShadowLight {
+  -webkit-box-shadow: 5px 5px 21px 0px rgba(255, 255, 255, 0.15);
+  box-shadow: 5px 5px 21px 0px rgba(255, 255, 255, 0.15);
+}
+
+@mixin boxShadowDark {
+  -webkit-box-shadow: 5px 5px 21px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 5px 5px 21px 0px rgba(0, 0, 0, 0.15);
+}
+
+@mixin flexColumnCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flexRowCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin absoCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin backgroundTertiary {
+  background-image: linear-gradient(
+    to right bottom,
+    $color-background-tertiary-1,
+    $color-background-tertiary-2
+  );
+}
+
+@mixin backgroundPrimary {
+  background-image: linear-gradient(
+    to right bottom,
+    $color-background-primary-1,
+    $color-background-primary-2
+  );
+}

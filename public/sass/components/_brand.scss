@@ -1,0 +1,27 @@
+.brand {
+  position: absolute;
+  @include flexColumnCenter;
+  &__logo {
+    opacity: 0.3;
+    @media only screen and (max-width: 1200px) {
+      width: 70%;
+    }
+    @media only screen and (max-width: 600px) {
+      width: 40%;
+    }
+  }
+
+  &__title {
+    font-size: 6rem;
+    font-family: $font-secondary;
+    font-weight: 300;
+    color: $color-blue-light;
+    opacity: 0.3;
+    @media only screen and (max-width: 1200px) {
+      font-size: 5vw;
+    }
+    @media only screen and (max-width: 600px) {
+      font-size: 3.5vw;
+    }
+  }
+}

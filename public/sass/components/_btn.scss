@@ -1,0 +1,23 @@
+.btn {
+  border: none;
+  color: $color-blue-dark;
+  background-color: $color-blue-light;
+  border-radius: 2rem;
+  transition: all 0.2s;
+  font-size: 1.6rem;
+  padding: 0.5rem 1rem;
+  font-family: $font-secondary;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  @media only screen and (max-width: 600px) {
+    font-size: 1.6rem;
+    padding: 0.6rem;
+  }
+  &:hover,
+  &:active {
+    transform: scale(1.1);
+    background-color: $color-blue-med;
+  }
+  @include boxShadowLight;
+}

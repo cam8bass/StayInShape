@@ -1,0 +1,41 @@
+.container__index {
+  display: grid;
+  grid-template-columns: minmax(27rem, 30rem) 1fr;
+  min-height: 100vh;
+  position: relative;
+
+  @media only screen and (max-width: 1200px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 18.6rem 1fr;
+
+  }
+  @media only screen and (max-width: 600px) {
+    grid-template-rows: 8rem 1fr;
+    justify-content: center;
+  }
+}
+
+.container__permission {
+  min-height: 100vh;
+}
+
+.container__createClub {
+  min-height: 100vh;
+}
+
+.container__showProfil {
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  min-height: 100vh;
+}
+
+.container__login{
+  display: grid;
+  grid-template-columns: minmax(27rem, 30rem) 1fr;
+  min-height: 100vh;
+  position: relative;
+  @media only screen and (max-width: 1200px) {
+    grid-template-columns: 1fr;
+   
+  }
+}

@@ -1,0 +1,21 @@
+.hidden {
+  visibility: hidden;
+  display: none;
+}
+
+.active {
+  border: 3px solid $color-green;
+}
+
+.inactive {
+  border: 3px solid $color-red-light;
+  opacity: 0.8;
+}
+
+.pb-4 {
+  padding-bottom: 4rem;
+}
+
+.blocked {
+  opacity: 0.4;
+}

@@ -1,0 +1,128 @@
+.sideBar {
+  grid-column: 1/2;
+  display: grid;
+  grid-template-rows: repeat(3, min-content);
+  justify-content: center;
+  align-items: center;
+  background-color: $color-background-secondary;
+  @include boxShadowDark;
+  @media only screen and (max-width: 1200px) {
+    grid-template-rows: 1fr;
+    grid-template-columns: minmax(min-content, 1fr) minmax(min-content, 1fr) minmax(
+        min-content,
+        1fr
+      );
+    padding: 0 2rem;
+    width: 100%;
+    height: 18.6rem;
+  }
+  @media only screen and (max-width: 600px) {
+    height: 8rem;
+    justify-content: center;
+  }
+
+  &__home {
+    grid-row: 1/2;
+    justify-self: center;
+    align-self: center;
+    @include flexRowCenter;
+    margin-top: 8rem;
+    margin-bottom: 5.6rem;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    border: 3px solid $color-blue-light;
+    text-decoration: none;
+    transition: all 0.2s;
+    @include boxShadowLight;
+    z-index: 2;
+    @media only screen and (max-width: 1200px) {
+      grid-column: 1/2;
+      margin-top: 0rem;
+      margin-bottom: 0rem;
+    }
+    @media only screen and (max-width: 600px) {
+      width: 5rem;
+      height: 5rem;
+      border: 1.5px solid $color-blue-light;
+    }
+
+    &:hover,
+    &:active {
+      transform: scale(1.2);
+    }
+    &-text {
+      font-size: 4rem;
+      font-family: $font-tertiary;
+      color: #fff;
+      @media only screen and (max-width: 600px) {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  &__search {
+    grid-row: 2/3;
+    display: flex;
+    margin-bottom: 8.8rem;
+    position: relative;
+
+    @media only screen and (max-width: 1200px) {
+      margin-bottom: 0;
+      grid-row: 1/2;
+      grid-column: 2/3;
+      justify-self: center;
+    }
+
+    &-input {
+      width: 22rem;
+      height: 3.3rem;
+      border: none;
+      text-align: center;
+      border-radius: 2px;
+      font-family: $font-primary;
+      font-size: 1.6rem;
+      @include boxShadowLight;
+      @media only screen and (max-width: 600px) {
+        width: 15rem;
+        font-size: 1.2rem;
+      }
+    }
+
+    &-btn {
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      &-filter {
+        position: absolute;
+        top: 20%;
+        right: 20%;
+        width: 2rem;
+        height: 2rem;
+        transition: all 0.2s;
+        @media only screen and (max-width: 600px) {
+          top: 20%;
+          right: 10%;
+        }
+        &:hover,
+        &:active {
+          transform: scale(1.2);
+        }
+      }
+
+      &-search {
+        width: 3.3rem;
+        height: 3.3rem;
+        transition: all 0.2s;
+        @media only screen and (max-width: 600px) {
+          display: none;
+        }
+
+        &:hover,
+        &:active {
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+}

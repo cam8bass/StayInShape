@@ -1,0 +1,130 @@
+.list {
+  margin: 4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min-content, 46rem));
+  grid-template-rows: min-content;
+  justify-content: center;
+  @media only screen and (max-width: 600px) {
+    grid-template-columns: repeat(auto-fill, minmax(min-content, 46rem));
+  }
+
+  gap: 3rem;
+  &__link {
+    text-decoration: none;
+  }
+
+  &__block {
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    grid-template-rows: min-content 1fr;
+    justify-content: center;
+    align-content: center;
+    padding: 1rem;
+    column-gap: 2rem;
+    text-decoration: none;
+    min-height: 27rem;
+    @include backgroundTertiary;
+    @include boxShadowLight;
+    border-radius: 20px;
+    transition: all 0.2s;
+    &:hover,
+    &:active {
+      transform: scale(1.1);
+    }
+    @media only screen and (max-width: 600px) {
+      min-height: 24rem;
+      grid-template-columns: repeat(2, max-content);
+      grid-template-rows: repeat(2, min-content);
+      column-gap: 0;
+      row-gap: 1rem;
+    }
+  }
+
+  &:hover &__block:not(:hover) {
+    transform: scale(0.95);
+  }
+
+  &__img {
+    grid-column: 1/2;
+    grid-row: 1/3;
+    justify-self: center;
+    align-self: center;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    @include boxShadowDark;
+    object-fit: cover;
+    @media only screen and (max-width: 600px) {
+      grid-row: 1/2;
+      grid-column: 1/-1;
+      margin-left: 0;
+    }
+  }
+
+  &__icon {
+    grid-column: 3/4;
+    grid-row: 1/2;
+    width: 4rem;
+    height: 4rem;
+    justify-self: end;
+
+    @media only screen and (max-width: 600px) {
+      grid-column: 2/3;
+      grid-row: 1/2;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    grid-column: 2/3;
+    grid-row: 1/3;
+    align-self: center;
+    @media only screen and (max-width: 600px) {
+      grid-row: 2/3;
+      grid-column: 1/3;
+    }
+  }
+
+  &__text {
+    font-family: $font-secondary;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  &__filter {
+    margin: 2rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 10px;
+    width: min-content;
+    @include flexRowCenter;
+    border: 2px solid $color-green;
+    transition: all 0.2s;
+    &:hover,
+    &:active {
+      border: 2px solid $color-red-light;
+    }
+    &-btn {
+      width: 3rem;
+      height: 3rem;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover,
+      &:active {
+        transform: scale(1.1);
+      }
+
+      &:not(:first-child) {
+        margin-left: 1rem;
+      }
+    }
+
+    &-icon {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+}

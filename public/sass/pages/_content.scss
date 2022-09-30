@@ -1,0 +1,42 @@
+.content {
+  position: relative;
+  width: 100%;
+  @include backgroundPrimary;
+
+  &__index {
+    grid-column: 2/3;
+    @include flexColumnCenter;
+    @include boxShadowDark;
+    @media only screen and (max-width: 1200px) {
+      grid-column: 1/2;
+      grid-row: 2/3;
+    }
+  }
+
+  &__search {
+    grid-column: 2/3;
+    @include boxShadowDark;
+    @media only screen and (max-width: 1200px) {
+      grid-column: 1/2;
+      grid-row: 2/3;
+    }
+  }
+
+  &__createClub {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  &__popup {
+    grid-column: 1/-1;
+    grid-row: 1/-1;
+  }
+
+  &__login {
+    @include flexColumnCenter;
+    position: relative;
+    width: 100%;
+  }
+}
