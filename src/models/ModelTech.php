@@ -12,6 +12,12 @@ class ModelTech extends Model
 {
   public DatabaseConnection $dbh;
 
+  /**
+   * create new user profile, send to the user table 
+   * @param array $newPartner new partner profile
+   * @param string $type type of user 
+   * @return string id user
+   */
   public function createUser(array $newPartner, string $type)
   {
     $statementCreateUser = $this->dbh->connectDb()->prepare("INSERT INTO user VALUES(
@@ -39,6 +45,12 @@ class ModelTech extends Model
     return $this->dbh->connectDb()->lastInsertId();
   }
 
+  /**
+   * create new partner and send data to the partner table
+   * @param string $idPartner
+   * @param array $newPartner
+   * @return array new partner profile 
+   */
   public function createPartner(string $idPartner, array $newPartner)
   {
     $statementCreatePartner = $this->dbh->connectDb()->prepare("INSERT INTO partner VALUES(
@@ -57,6 +69,14 @@ class ModelTech extends Model
     return $statementCreatePartner->fetch();
   }
 
+  /**
+   * create new club and send data to the club table
+   * @param string $idClub
+   * @param array $newClub
+   * @param string $idPermission
+   * @param string $activation key
+   * @return array new club profile
+   */
   public function createClub(string $idClub, array $newClub, string $idPermission, string $activationKey)
   {
     $statementCreateClub = $this->dbh->connectDb()->prepare("INSERT INTO club VALUES(
@@ -82,6 +102,10 @@ class ModelTech extends Model
     return $statementCreateClub->fetch();
   }
 
+  /**
+   * delete user
+   * @param string $idProfile
+   */
   public function deleteUser(string $idProfile)
   {
     $statementDeleteUser = $this->dbh->connectDb()->prepare("DELETE FROM user WHERE id=:idProfile");
@@ -89,6 +113,10 @@ class ModelTech extends Model
     $statementDeleteUser->execute();
   }
 
+  /**
+   * delete partner profile in partner table
+   * @param string $idPartner
+   */
   public function deleteProfilePartner(string $idPartner)
   {
     $statementDeleteProfilePartner = $this->dbh->connectDb()->prepare("DELETE FROM partner WHERE idPartner=:idPartner");
@@ -96,6 +124,10 @@ class ModelTech extends Model
     $statementDeleteProfilePartner->execute();
   }
 
+  /**
+   * delete club profile in club table
+   * @param string $idClub
+   */
   public function deleteProfileClub(string $idClub)
   {
     $statementDeleteProfileClub = $this->dbh->connectDb()->prepare("DELETE FROM club WHERE idClub=:idClub");
@@ -103,6 +135,11 @@ class ModelTech extends Model
     $statementDeleteProfileClub->execute();
   }
 
+  /**
+   * enable or disable user profiles
+   * @param string $idProfile
+   * @param string $newStatus
+   */
   public function changeStatus(string $idProfile, string $newStatus)
   {
     $statementChangeStatus = $this->dbh->connectDb()->prepare("UPDATE user SET status=:newStatus  WHERE id=$idProfile");
@@ -110,6 +147,10 @@ class ModelTech extends Model
     $statementChangeStatus->execute();
   }
 
+  /**
+   * retrieve all partner profile
+   * @return array all partner
+   */
   public function selectAllPartners()
   {
     $statementSelectAllPartners = $this->dbh->connectDb()->prepare("SELECT idPartner,firstName,lastName,email,type,franchiseName,status,attachedClub,img
@@ -121,6 +162,10 @@ class ModelTech extends Model
     return $statementSelectAllPartners->fetchAll();
   }
 
+  /**
+   * retrive all club profile
+   * @return array all club
+   */
   public function selectAllClubs()
   {
     $statementSelectAllClubs = $this->dbh->connectDb()->prepare("SELECT firstName,lastName,email,type,idClub,clubName,nameFranchiseOwner, status,img
@@ -132,6 +177,11 @@ class ModelTech extends Model
     return $statementSelectAllClubs->fetchAll();
   }
 
+  /**
+   * retrieve user status
+   * @param string $idProfile
+   * @return array user status
+   */
   public function retrieveUserStatus(string $idProfile)
   {
     $statementRetrieveUserStatus = $this->dbh->connectDb()->prepare("SELECT status from user WHERE id=$idProfile");
@@ -139,6 +189,11 @@ class ModelTech extends Model
     return $statementRetrieveUserStatus->fetch();
   }
 
+  /**
+   * retrieve list of all clubs owned by partners
+   * @param string $idPartner
+   * @return array all attached club
+   */
   public function retrieveAttachedClubToPartner(string $idPartner)
   {
     $statementRetrieveAttachedClubToPartner = $this->dbh->connectDb()->prepare("SELECT attachedClub FROM partner
@@ -148,6 +203,11 @@ class ModelTech extends Model
     return $statementRetrieveAttachedClubToPartner->fetch();
   }
 
+  /**
+   * find partner profile with franchise name
+   * @param string $newFranchiseName
+   * @return array partner profile
+   */
   public function retrievePartnerWithFranchiseName(string $newFranchiseName)
   {
     $statementRetrievePartnerWithFranchiseName = $this->dbh->connectDb()->prepare("SELECT idPartner FROM partner WHERE franchiseName=:franchiseName");
@@ -156,6 +216,10 @@ class ModelTech extends Model
     return $statementRetrievePartnerWithFranchiseName->fetch();
   }
 
+  /**
+   * find all franchise names
+   * @return array 
+   */
   public function retrieveAllFranchiseNames()
   {
     $statementRetrieveAllFranchiseNames = $this->dbh->connectDb()->prepare("SELECT franchiseName FROM partner ");
@@ -163,6 +227,11 @@ class ModelTech extends Model
     return $statementRetrieveAllFranchiseNames->fetchAll();
   }
 
+  /**
+   * retrieve parent partner profile with id
+   * @param string $idClub
+   * @return array partner profile
+   */
   public function retrieveIdProfileParent(string $idClub)
   {
     $statementRetrieveIdProfileParent = $this->dbh->connectDb()->prepare("SELECT idPartnerParent FROM club WHERE idClub=:idClub");
@@ -171,6 +240,11 @@ class ModelTech extends Model
     return $statementRetrieveIdProfileParent->fetch();
   }
 
+  /**
+   * update new permissions
+   * @param string $newIdPermission
+   * @param string $idClub
+   */
   public function updatePermissions(string $newIdPermission, string $idClub)
   {
     $statementUpdatePermissions = $this->dbh->connectDb()->prepare("UPDATE club SET idPermission = :newIdPermission WHERE idClub=$idClub ");
@@ -179,6 +253,11 @@ class ModelTech extends Model
     return $statementUpdatePermissions->fetch();
   }
 
+  /**
+   * add club to the partner in the partner table
+   * @param string $idPartner
+   * @param string $idClub
+   */
   public function addClubToParentPartner(string $idPartner, string $idClub)
   {
     $statementAddClubToParentPartner = $this->dbh->connectDb()->prepare("UPDATE partner SET attachedClub= :idClub
@@ -188,6 +267,12 @@ class ModelTech extends Model
     $statementAddClubToParentPartner->execute();
   }
 
+  /**
+   * update club profile after change owner 
+   * @param string $idClub
+   * @param string $newIdPartner
+   * @param string $newFranchiseName
+   */
   public function changeClubProfileAfterChangeOwner(string $idClub, string $newIdPartner, string $newFranchiseName)
   {
     $statementChangeClubProfileAfterChangeOwner = $this->dbh->connectDb()->prepare("UPDATE club
@@ -199,6 +284,11 @@ class ModelTech extends Model
     $statementChangeClubProfileAfterChangeOwner->execute();
   }
 
+  /**
+   * verify data of the profile creation form 
+   * @param array $allInput form data
+   * @return array $allInput data from vérified form
+   */
   public function checkAllInputCreateProfile(array $allInput): array
   {
     $allInput = filter_input_array(INPUT_POST, [
@@ -211,6 +301,11 @@ class ModelTech extends Model
     return $allInput ?? [];
   }
 
+  /**
+   * create permissions file and put the new permissions in this file
+   * @param string $clubPermissions
+   * @return $id permission id
+   */
   public function createPermissionsFile(array $clubPermissions)
   {
     $permissions = [];
@@ -229,14 +324,20 @@ class ModelTech extends Model
     return $id;
   }
 
+  /**
+   * modify permissions file and create a new id permissions
+   * @param string $oldIdPermissions
+   * @param array $newPermission
+   * @return string new id permission
+   */
   public function modifyPermissionsFile(string $oldIdPermissions, array $newPermission)
   {
     if (file_exists($this->filePath)) {
-      // Permet de récupérer le contenu du fichier permission 
+      // Permets de récupérer le contenu du fichier permission 
       $permissions = json_decode(file_get_contents($this->filePath), true) ?? [];
-      // Permet de créer un nouvelle id
+      // Permets de créer un nouvel id
       $newId = time();
-      // Permet de remplacer les anciennes permissions par les nouvelles
+      // Permets de remplacer les anciennes permissions par les nouvelles
       $indexOldPermissions = array_search($oldIdPermissions, array_column($permissions, "idPermission"));
       $permissions[$indexOldPermissions] = [
         'permissions' => $newPermission,
@@ -247,16 +348,20 @@ class ModelTech extends Model
     }
   }
 
+  /**
+   * remove old permissions selected
+   * @param string $oldPermissions
+   */
   public function deletePermissions(string $oldIdPermissions)
   {
-    // Permet de récupérer le contenu du fichier permission 
+    // Permets de récupérer le contenu du fichier permission 
     $permissions = json_decode(file_get_contents($this->filePath), true) ?? [];
-    // Permet de récupérer l'index de permissions à supprimer
+    // Permets de récupérer l'index de permissions à supprimer
     $indexOldPermissions = array_search($oldIdPermissions, array_column($permissions, "idPermission"));
-    // Permet de supprimer les permissions du profile
+    // Permets de supprimer les permissions du profil
     unset($permissions[$indexOldPermissions]);
     $permissions = [...$permissions];
-    // // Permet de sauvegarder les modifications de supression
+    // Permets de sauvegarder les modifications de suppression
     file_put_contents($this->filePath, json_encode($permissions));
   }
 }

@@ -6,20 +6,13 @@
 
     <!-- Start btn return for desk -->
     <a href="../../index.php?status=on&action=displayAllPartner" class="btn header__return">
-      <svg class="header__return-icon">
-        <use xlink:href="./public/img/svg/sprite.svg#icon-long-arrow-left
-          "></use>
-      </svg>
+      <img src="public/img/icons/icon-left-arrow.png" alt="button return" class="header__return-icon">
       Retour</a>
     <!-- End btn return for desk -->
 
     <!-- Start btn return for mob -->
     <a href="../../index.php?status=on&action=displayAllPartner" class=" header__return-blue">
-
-      <svg class="header__return-icon--blue">
-        <use xlink:href="./public/img/svg/sprite.svg#icon-long-arrow-left
-          "></use>
-      </svg>
+      <img src="public/img/icons/icon-left-arrow-blue.png" alt="button return" class="header__return-icon">
     </a>
     <!-- End btn return for mob  -->
 
@@ -64,7 +57,7 @@
 
       <a href="../../index.php?status=on&action=info&id=<?= $partnerProfile['idPartner'] ?>" class="btn header__link">
         <img src="./public/img/icons/icon-info.png" alt="icon-info" class="header__icon" />
-        Plus d'info</a>
+        Plus d'infos</a>
 
       <!-- Start link for mob -->
       <?php if ($partnerProfile['status'] === "enabled") : ?>
@@ -116,7 +109,7 @@
                     <p class="list__text">Franchise responsable : <?= $club['nameFranchiseOwner'] ?></p>
                   </li>
                   <li class="list__item">
-                    <p class="list__text">Profile : <?= $club['status'] === 'enabled' ? "Actif" : "Désactivé" ?></p>
+                    <p class="list__text">Profil : <?= $club['status'] === 'enabled' ? "Actif" : "Désactivé" ?></p>
                   </li>
                 </ul>
               </div>

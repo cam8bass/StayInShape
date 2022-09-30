@@ -11,8 +11,9 @@
 @import "layout/header";
 @import "layout/permission";
 @import "layout/section";
-// === Components ===
+@import "layout/help";
 
+// === Components ===
 @import "components/login";
 @import "components/btn";
 @import "components/list";

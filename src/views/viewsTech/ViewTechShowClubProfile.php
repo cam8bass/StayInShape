@@ -6,20 +6,13 @@
 
     <!-- Start btn return for desk -->
     <a href="../../index.php?status=on&action=<?= isset($_SESSION['idPartnerParent']) ? "showPartnerProfile&id=$club[idPartnerParent]" : "displayAllClubs" ?>" class="btn header__return">
-      <svg class="header__return-icon">
-        <use xlink:href="./public/img/svg/sprite.svg#icon-long-arrow-left
-          "></use>
-      </svg>
+    <img src="public/img/icons/icon-left-arrow.png" alt="button return" class="header__return-icon">
       Retour</a>
     <!-- End btn return for desk -->
 
     <!-- Start btn return for mob -->
     <a href="../../index.php?status=on&action=<?= isset($_SESSION['idPartnerParent'])  ? "showPartnerProfile&id=$club[idPartnerParent]" : "displayAllClubs" ?>" class=" header__return-blue">
-
-      <svg class="header__return-icon--blue">
-        <use xlink:href="./public/img/svg/sprite.svg#icon-long-arrow-left
-          "></use>
-      </svg>
+    <img src="public/img/icons/icon-left-arrow-blue.png" alt="button return" class="header__return-icon">
     </a>
     <!-- End btn return for mob  -->
 
@@ -42,7 +35,7 @@
         <p class="header__text">Franchise responsable : <?= $club['nameFranchiseOwner'] ?></p>
       </li>
       <li class="header__item">
-        <p class="header__text">Profile : <?= $club['status'] === "enabled" ? "Actif" : "Désactivé" ?></p>
+        <p class="header__text">Profil : <?= $club['status'] === "enabled" ? "Actif" : "Désactivé" ?></p>
       </li>
     </ul>
 
@@ -62,7 +55,7 @@
 
       <a href="../../index.php?status=on&action=info&id=<?= $club['idClub'] ?>" class="btn header__link">
         <img src="./public/img/icons/icon-info.png" alt="icon-info" class="header__icon" />
-        Plus d'info</a>
+        Plus d'infos</a>
 
       <!-- Start link for mob -->
       <a href="../../index.php?status=on&action=changeClubOwnerForm&id=<?= $club['idClub'] ?>" class=" header__link-blue">

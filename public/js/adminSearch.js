@@ -7,7 +7,7 @@ const overlay = document.querySelector(".searchResults");
 
 let dataArray = [];
 
-// Permet de créer les élements de la liste
+// Permet de créer les éléments de la liste
 const displayUserTechList = function (usersList) {
   usersList.forEach((user) => {
     const listItem = document.createElement("div");
@@ -22,14 +22,14 @@ const displayUserTechList = function (usersList) {
 };
 
 const searchAllTech = async function () {
-  //Permet de récupérer les info des users
+  //Permet de récupérer les infos des users
   const results = await helpers.AJAX("src/helpers/adminSearch.php");
   // Permet de trier les users récupérés
   dataArray = helpers.orderList(results);
   displayUserTechList(dataArray);
 };
 
-// Permet de filter les données lors de la saisie dans l'input
+// Permet de filtrer les données lors de la saisie dans l'input
 searchInput.addEventListener("input", function (e) {
   searchResult.innerHTML = "";
   const searchedString = e.target.value.toLowerCase().replace(/\s/g, "");

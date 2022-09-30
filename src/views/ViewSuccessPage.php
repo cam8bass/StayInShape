@@ -2,13 +2,13 @@
 
 if ($requestType === "copyPassword") {
   $title = "Création partenaire";
-  $popupTitle = "Nouveau compte partenaire crée";
-  $popupText = "Le mot de passe de ce compte est $passwordGenerated";
+  $popupTitle = "Nouveau compte partenaire créé";
+  $popupText = "Le mot de passe pour le compte $newPartner[email] est $passwordGenerated";
   $popupLinkAgree = "../../../index.php?status=on&action=home";
 } elseif ($requestType === "copyPasswordClub") {
   $title = "Création club";
-  $popupTitle = "Nouveau compte club crée";
-  $popupText = "Le mot de passe de ce compte est $passwordGenerated , $messageMail";
+  $popupTitle = "Nouveau compte club créé";
+  $popupText = "Le mot de passe pour le compte $newClub[email] est $passwordGenerated , $messageMail";
   $popupLinkAgree = "../../../index.php?status=on&action=home";
 } elseif ($requestType === 'deletionError') {
   // Permet de remplir la page de confirmation de suppression de partenaire si le partenaire possède encore des clubs
@@ -57,27 +57,27 @@ if ($requestType === "copyPassword") {
   $popupTitle = "Erreur envoi e-mail";
   $popupText = "
   Un problème est survenu durant l'envoi de l'e-mail concernant la modification des permissions de ce compte.
-   Cependant les permissions ont bien été modifiées.
+   Cependant, les permissions ont bien été modifiées.
   ";
   $popupLinkAgree = "../../../index.php?status=on&action=home";
 } elseif ($requestType === "clubStatusChange") {
   $title = "Modification de statut";
   $popupTitle = "Modification de statut du club";
-  $popupText = "Nous confirmons la modification de status pour ce compte, un e-mail de 
+  $popupText = "Nous confirmons la modification de statut pour ce compte, un e-mail de 
   notification de ces changements vient d'être envoyé au responsable de la franchise concerné";
   $popupLinkAgree = "../../../index.php?status=on&action=home";
 } elseif ($requestType === "errorClubStatusChange") {
-  $title = "Erreur envoie";
-  $popupTitle = "Erreur envoi e-mail";
+  $title = "Erreur lors de l'envoi";
+  $popupTitle = "Erreur lors de l'envoi de l'e-mail";
   $popupText = "
   Un problème est survenu durant l'envoi de l'e-mail concernant la modification du statut de ce compte.
-   Cependant les modifications ont bien été effectué.
+  Cependant, les modifications ont bien été effectuées.
   ";
   $popupLinkAgree = "../../../index.php?status=on&action=home";
 } elseif ($requestType === "partnerStatusChange") {
   $title = "Modification de statut";
   $popupTitle = "Modification de statut du franchisé";
-  $popupText = "Nous confirmons la modification de status pour ce compte.";
+  $popupText = "Nous confirmons la modification de statut pour ce compte.";
   $popupLinkAgree = "../../../index.php?status=on&action=home";
 } elseif ($requestType === "deleteClubAccount") {
   $title = "Suppression compte";
@@ -85,14 +85,14 @@ if ($requestType === "copyPassword") {
   $popupText = "Nous confirmons la suppression de ce compte";
   $popupLinkAgree = "../../../index.php?status=on&action=home";
 } elseif ($requestType === "changeOwner") {
-  $title = "Changement propriétaire";
+  $title = "Changement de propriétaire";
   $popupTitle = "Confirmation changement de propriétaire";
   $popupText = "Nous confirmons le changement de propriétaire";
   $popupLinkAgree = "../../../index.php?status=on&action=home";
 } elseif ($requestType === "accountActivation") {
   $title = "Activation réussi";
   $popupTitle = "Confirmation de l'activation du compte";
-  $popupText = "La création du compte vient d'être confirmé, il est maintenant disponible";
+  $popupText = "La création du compte vient d'être confirmée, il est maintenant disponible";
   $popupLinkAgree = "../../../index.php";
 } elseif ($requestType === "accountActivationFailed") {
   $title = "Échec activation";

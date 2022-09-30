@@ -1,6 +1,12 @@
-// === create user table ===
+# Database
 
-CREATE TABLE `u223495013_stayInShape`.`user` (
+Database initialisation
+
+
+## Create table "user"
+
+```bash
+CREATE TABLE `your database name`.`user` (
 `id` INT NOT NULL AUTO_INCREMENT,
 `firstName` VARCHAR(45) NOT NULL,
 `lastName` VARCHAR(45) NOT NULL,
@@ -13,43 +19,55 @@ CREATE TABLE `u223495013_stayInShape`.`user` (
 `create` TINYINT NOT NULL,
 PRIMARY KEY (`id`),
 UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
+```
 
-// create session table ===
+## Create table "session"
 
-CREATE TABLE `u223495013_stayInShape`.`session` (
+```bash
+CREATE TABLE `your database name`.`session` (
 `idSession` CHAR(64) NOT NULL,
 `idUser` INT NOT NULL,
 PRIMARY KEY (`idSession`));
+```
 
-// === add timestamp ===
-ALTER TABLE u223495013_stayInShape.session ADD createdAt timestamp DEFAULT CURRENT_TIMESTAMP
+#### Create timestamp
+
+```bash
+ALTER TABLE yourDatabaseName.session ADD createdAt timestamp DEFAULT CURRENT_TIMESTAMP
 CREATE EVENT ClearExpiredSessions
 ON SCHEDULE EVERY 1 DAY
 COMMENT 'Nettoie la table session tous les jours'
 DO
-DELETE FROM u223495013_stayInShape.session WHERE DATE_ADD(createdAt, INTERVAL 2 WEEK) < NOW();
+DELETE FROM yourDatabaseName.session WHERE DATE_ADD(createdAt, INTERVAL 2 WEEK) < NOW();
+```
 
-// === create table partner ===
+## Create table "partner"
 
-CREATE TABLE `u223495013_stayInShape`.`partner` (
+```bash
+CREATE TABLE `yourDatabaseName`.`partner` (
 `idPartner` INT NOT NULL AUTO_INCREMENT,
 `franchiseName` VARCHAR(255) NOT NULL,
 `attachedClub` LONGTEXT NULL,
 `img` VARCHAR(255) NULL,
 `description` LONGTEXT NULL,
 PRIMARY KEY (`idPartner`));
+```
 
-// === add foreign key ===
-ALTER TABLE `u223495013_stayInShape`.`partner`
+#### Add foreign KEY
+
+```bash
+ALTER TABLE `yourDatabaseName`.`partner`
 ADD CONSTRAINT `fk_partner_user`
 FOREIGN KEY (`idPartner`)
-REFERENCES `u223495013_stayInShape`.`user` (`id`)
+REFERENCES `yourDatabaseName`.`user` (`id`)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION;
+```
 
-// === create table club ===
+## Create table "club"
 
-CREATE TABLE `u223495013_stayInShape`.`club` (
+```bash
+CREATE TABLE `yourDatabaseName`.`club` (
 `idClub` INT NOT NULL,
 `idPermission` INT NOT NULL,
 `idPartnerParent` INT NOT NULL,
@@ -59,11 +77,15 @@ CREATE TABLE `u223495013_stayInShape`.`club` (
 `description` LONGTEXT NULL,
 `numActive` VARCHAR(255) NOT NULL,
 PRIMARY KEY (`idClub`));
+```
 
-// === add foreign key ===
-ALTER TABLE `u223495013_stayInShape`.`club`
+#### Add foreign KEY
+
+```bash
+ALTER TABLE `yourDatabaseName`.`club`
 ADD CONSTRAINT `fk_club_user`
 FOREIGN KEY (`idClub`)
-REFERENCES `u223495013_stayInShape`.`user` (`id`)
+REFERENCES `yourDatabaseName`.`user` (`id`)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION;
+```

@@ -33,14 +33,14 @@ const displayAllUserList = function (usersList) {
 };
 
 const searchAllUser = async function () {
-  //Permet de récupérer les info des users
+  //Permet de récupérer les infos des users
   const results = await helpers.AJAX("src/helpers/techSearch.php");
   // Permet de trier les users récupérés
   dataArray = helpers.orderList(results);
   displayAllUserList(dataArray);
 };
 
-// Permet de filter les données lors de la saisie dans l'input
+// Permet de filtrer les données lors de la saisie dans l'input
 searchInput.addEventListener("input", function (e) {
   searchResult.innerHTML = "";
   const searchedString = e.target.value.toLowerCase().replace(/\s/g, "");

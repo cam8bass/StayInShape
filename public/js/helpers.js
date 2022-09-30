@@ -1,4 +1,4 @@
-// === Permet d'établir la connection ===
+// === Permet d'établir la connexion ===
 export const AJAX = async function (url) {
   try {
     const fetchPro = fetch(url, {
@@ -33,7 +33,7 @@ export const orderList = function (data) {
   return orderData;
 };
 
-// === Permet de filter des données ===
+// === Permet de filtrer des données ===
 export const filterData = function (searchedString, dataArray) {
   const filterArr = dataArray.filter(
     (el) =>
@@ -63,19 +63,19 @@ export const closeSearchResult = function (window, background) {
 };
 
 export const windowOpenHandler = function (searchInput, searchResult, overlay) {
-  // Permet d'ouvrir la fenetre de recherche
+  // Permet d'ouvrir la fenêtre de recherche
   searchInput.addEventListener("click", function () {
     openSearchResult(searchResult, overlay);
   });
 };
 
 export const windowCloseHandler = function (btnClose, searchResult, overlay) {
-  // Permet de fermer la fenetre avec l'aide du bouton de fermeture
+  // Permet de fermer la fenêtre avec l'aide du bouton de fermeture
   btnClose.addEventListener("click", function () {
     closeSearchResult(searchResult, overlay);
   });
 
-  // Permet de fermet la fenetre à l'aide de la touche echap
+  // Permet de fermer la fenêtre à l'aide de la touche echap
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && !searchResult.classList.contains("hidden")) {
       closeSearchResult(searchResult, overlay);

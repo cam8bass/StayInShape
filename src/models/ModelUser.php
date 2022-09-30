@@ -15,6 +15,11 @@ class ModelUser extends Model
 
 
 
+  /**
+   * recover password user
+   * @param string $idUser
+   * @return array user password
+   */
   public function retrieveUserPassword(string $idUser)
   {
     $statementRetrieveUserPassword = $this->dbh->connectDb()->prepare("SELECT password FROM user WHERE id=:idUser");
@@ -23,6 +28,12 @@ class ModelUser extends Model
     return $statementRetrieveUserPassword->fetch();
   }
 
+  /**
+   * retrieve old user description
+   * @param string $userType club or partner
+   * @param string $idUser
+   * @return array user description
+   */
   public function retrieveUserDescription(string $userType, string $idUser)
   {
     if ($userType === "Partner") {
@@ -43,7 +54,13 @@ class ModelUser extends Model
     return $statementRetrieveUserDescription->fetch();
   }
 
-  public function changePathImg(string $userType, $newImg, string $idClub)
+  /**
+   * change user profile picture
+   * @param string $userType club or partner
+   * @param string $newImg img path
+   * @param string $idClub
+   */
+  public function changePathImg(string $userType, string $newImg, string $idClub)
   {
     if ($userType === "Club") {
       $statementChangePathImg = $this->dbh->connectDb()->prepare("UPDATE club SET img=:newImg WHERE idClub=:idUser ");
@@ -55,6 +72,11 @@ class ModelUser extends Model
     $statementChangePathImg->execute();
   }
 
+  /**
+   * change user password
+   * @param string $idUser
+   * @param string $newPassword
+   */
   public function changeUserPassword(string $idUser, string $newPassword)
   {
     $statementChangeUserPassword = $this->dbh->connectDb()->prepare("UPDATE user SET password=:newPassword WHERE id=:idUser");
@@ -63,6 +85,12 @@ class ModelUser extends Model
     $statementChangeUserPassword->execute();
   }
 
+  /**
+   * edit user description
+   * @param string $newDescription
+   * @param string $userType club or partner
+   * @param string $idUser
+   */
   public function changeUserDescription(string $newDescription, string $userType, string $idUser)
   {
     if ($userType === "Partner") {
@@ -75,39 +103,62 @@ class ModelUser extends Model
     $statementChangeUserDescription->execute();
   }
 
-  public function retrieveActicationKey($idClub)
+  /**
+   * retrieve account activation key
+   * @param string $idClub
+   * @return array activation key
+   */
+  public function retrieveActicationKey(string $idClub)
   {
     $statementRetrieveActivationKey = $this->dbh->connectDb()->prepare("SELECT numActive FROM club WHERE idClub=$idClub");
     $statementRetrieveActivationKey->execute();
     return $statementRetrieveActivationKey->fetch();
   }
 
-  public function sendActivation($idClub)
+  /**
+   * modify status of the activation key
+   * @param string $idClub
+   */
+  public function sendActivation(string $idClub)
   {
     $statementSendActivationKey = $this->dbh->connectDb()->prepare("UPDATE club SET numActive=:activationKey WHERE idClub=$idClub");
     $statementSendActivationKey->bindValue(":activationKey", "activated");
     return $statementSendActivationKey->execute();
   }
 
-  public function accountActivation($idClub)
+  /**
+   * activate club account
+   * @param string $idClub
+   */
+  public function accountActivation(string $idClub)
   {
     $statementAccountActivation = $this->dbh->connectDb()->prepare("UPDATE user SET status=:active WHERE id=$idClub ");
     $statementAccountActivation->bindValue(':active', "enabled");
     $statementAccountActivation->execute();
   }
 
-  public function saveImg($imgDownload)
+  /**
+   * save a new picture profile
+   * @param array $imgDownload
+   * @return string new img path
+   */
+  public function saveImg(array $imgDownload)
   {
     $idImg = uniqid();
     $imgExtension = pathinfo($imgDownload['img']['name'], PATHINFO_EXTENSION);
     $imgName = explode('.', $imgDownload['img']['name']);
-    // Permet de définir le nom de l'image, si l'image ne possède pas de nom alors id généré sera défini en tant que nom
+    // Permets de définir le nom de l'image, si l'image ne possède pas de nom alors id généré sera défini en tant que nom
     $newImgName =  !trim($imgName[0]) ? $idImg . "." . $imgExtension : strtolower(str_replace(" ", "", $imgName[0])) . "-" . $idImg . "." . $imgExtension;
-    // Permet de sauvegarder la nouvelle image
+    // Permets de sauvegarder la nouvelle image
     move_uploaded_file($imgDownload['img']['tmp_name'], $this->imgPath . $newImgName);
     return $this->imgPath . $newImgName;
   }
 
+  /**
+   * check data when changing password
+   * @param array $allInput
+   * @return array all input
+   */
   public function checkUserChangePassword(array $allInput): array
   {
     $allInput = filter_input_array(INPUT_POST, [
@@ -117,6 +168,11 @@ class ModelUser extends Model
     return $allInput ?? [];
   }
 
+  /**
+   * check new user description
+   * @param array $input new desciption
+   * @return array $new description
+   */
   public function checkUserDescription(array $input)
   {
     $newDescription = filter_input_array(INPUT_POST, [

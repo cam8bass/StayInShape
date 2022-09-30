@@ -24,60 +24,60 @@ class User
   {
     $userType = $_SESSION['currentUser']['type'];
     if ($userType === "Club") {
-      // Permet de récupérer l'id de l'utilisateur et le type
+      // Permets de récupérer l'id de l'utilisateur et le type
       $idUser = $_SESSION['currentUser']['id'];
     } elseif ($userType === "Partner") {
       $idUser = $_GET['id'] ?? "";
     }
-    // Permet de récupérer le profile du club
+    // Permets de récupérer le profile du club
     $club = $this->modelUser->retrieveClubWithIdClub($idUser);
-    // Permet de récupérer les permissions du club
+    // Permets de récupérer les permissions du club
     $clubPermission = $this->modelUser->retrievePermissions($club['idPermission']);
     require('src/views/viewsUser/ViewUserProfileClub.php');
   }
 
   public function displayUserProfilePartner()
   {
-    // Permet de récupérer l'id de l'utilisateur et le type
+    // Permets de récupérer l'id de l'utilisateur et le type
     $idUser = $_SESSION['currentUser']['id'] ?? '';
-    // Permet de récupérer le profil du partenaire 
+    // Permets de récupérer le profil du partenaire 
     $partnerProfile = $this->modelUser->retrievePartnerWithId($idUser);
-    // Permet de récupérer les clubs rattaché au partenaire
+    // Permets de récupérer les clubs rattachés au partenaire
     $allClubs = $this->modelUser->retrieveAllClubsAssociatedWithPartner($partnerProfile['franchiseName']);
     require('src/views/viewsUser/ViewUserProfilePartner.php');
   }
 
   public function displayUserSettings()
   {
-    // Permet de récupérer l'id de l'utilisateur et le type
+    // Permets de récupérer l'id de l'utilisateur et le type
     $idUser = $_SESSION['currentUser']['id'] ?? '';
     $userType = $_SESSION['currentUser']['type'] ?? '';
-    // Permet de récupérer les informations du profile de l'utilisateur 
+    // Permets de récupérer les informations du profil de l'utilisateur 
     $userProfile = $this->modelUser->retrieveUserProfile($userType, $idUser);
     require('src/views/ViewProfileInfo.php');
   }
 
   public function userChangePictureClub()
   {
-    // Permet de récupérer l'id de l'utilisateur et le type
+    // Permets de récupérer l'id de l'utilisateur et le type
     $idUser = $_SESSION['currentUser']['id'] ?? '';
     $userType = $_SESSION['currentUser']['type'] ?? '';
-    // Permet de vérifier l'image envoyé
+    // Permets de vérifier l'image envoyée
     $errorImgFile = $this->errorManagement->checkImgFile($_FILES);
-
+    
     if ($errorImgFile) {
-      // Si le fichier envoyer provoque une erreur
+      // Si le fichier envoyé provoque une erreur
       require("src/views/viewsUser/ViewUserChangePictureForm.php");
     } else {
-      // Permet de récupérer l'ancienne img
+      // Permets de récupérer l'ancienne image
       $oldImg = $this->modelUser->retrieveImgPath($userType, $idUser);
-      // Permet d'enregister l'image dans le dossier 
+      // Permets d'enregistrer l'image dans le dossier 
       $newImgPath = $this->modelUser->saveImg($_FILES);
-      // Permet de supprimer l'ancienne image si l'image est différente de l'image de profile par defaut
+      // Permets de supprimer l'ancienne image si l'image est différente de l'image de profil par défaut
       $this->modelUser->deleteOldImg($oldImg['img']);
-      // Permet de mettre à jour la bdd
+      // Permets de mettre à jour la bdd
       $this->modelUser->changePathImg($userType, $newImgPath, $idUser);
-      // Permet de rediriger vers la page home 
+      // Permets de rediriger vers la page home 
       $requestType = "downloadImg";
       require('src/views/ViewSuccessPage.php');
     }
@@ -86,23 +86,23 @@ class User
   public function userChangePassword()
   {
     $idUser = $_SESSION["currentUser"]["id"] ?? "";
-    // Permet de vérifier les inputs
+    // Permets de vérifier les inputs
     $allInput = $this->modelUser->checkUserChangePassword($_POST);
-    // Permet de récupérer l'ancien mot de passe de l'utilisateur
+    // Permets de récupérer l'ancien mot de passe de l'utilisateur
     $oldPasswordHash = $this->modelUser->retrieveUserPassword($idUser);
-    //Permet de vérifier la confirmité des inputs
+    // Permets de vérifier la conformité des inputs
     $errorChangePassword = $this->errorManagement->checkUserPassword($oldPasswordHash["password"], $allInput);
 
     if (empty(array_filter($errorChangePassword, fn ($el) => $el !== ''))) {
-      // Permet de hash le nouveau mot de passe
+      // Permets de hash le nouveau mot de passe
       $newPassword = password_hash($allInput['newPassword'], PASSWORD_ARGON2I);
-      // Permet d'envoyer le nouveau mot de passe à la BDD
+      // Permets d'envoyer le nouveau mot de passe à la BDD
       $this->modelUser->changeUserPassword($idUser, $newPassword);
-      // Permet de rédiriger vers la page home
+      // Permets de rédiriger vers la page home
       $requestType = "changePassword";
       require('src/views/ViewSuccessPage.php');
     } else {
-      require('templates/viewsUser/ViewUserChangePasswordForm.php');
+      require('src/views/viewsUser/ViewUserChangePasswordForm.php');
     }
   }
 
@@ -110,17 +110,17 @@ class User
   {
     $idUser = $_SESSION["currentUser"]["id"] ?? "";
     $userType = $_SESSION['currentUser']['type'] ?? '';
-    // Permet de vérifier la description
+    // Permets de vérifier la description
     $newDescription = $this->modelUser->checkUserDescription($_POST);
-    // Permet de vérifier la conformité de la description
+    // Permets de vérifier la conformité de la description
     $errorDescription = $this->errorManagement->checkUserDescription($newDescription);
-    // Permet de récupérer l'ancienne description
+    // Permets de récupérer l'ancienne description
     $oldDescription = $this->modelUser->retrieveUserDescription($userType, $idUser);
 
     if (!$errorDescription) {
-      // Permet de mettre a jour la nouvelle description dans la bdd
+      // Permets de mettre à jour la nouvelle description dans la bdd
       $this->modelUser->changeUserDescription($newDescription, $userType, $idUser);
-      // Permet de rédiriger vers la page home
+      // Permets de rédiriger vers la page home
       $requestType = "changeDescription";
       require('src/views/ViewSuccessPage.php');
     } else {
@@ -134,7 +134,7 @@ class User
     $activationKey = $_GET['key'] ?? '';
     $validKey = $this->modelUser->retrieveActicationKey($idClub);
 
-    if ($validKey === $activationKey) {
+    if ($validKey["numActive"] === $activationKey) {
       $activation = $this->modelUser->sendActivation($idClub);
       if ($activation) {
         $this->modelUser->accountActivation($idClub);
@@ -144,7 +144,7 @@ class User
       $requestType = "accountActivationFailed";
     }
 
-    // Permet de générer la page success 
+    // Permets de générer la page success 
     require("src/views/ViewSuccessPage.php");
   }
 }

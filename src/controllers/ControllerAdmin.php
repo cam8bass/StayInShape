@@ -30,14 +30,14 @@ class Admin
   public function adminAddAccount()
   {
     $requestType = "adminAddAccount";
-    //Permet de vérifier les inputs
+    // Permets de vérifier les inputs
     $allInput =  $this->modelAdmin->checkAllInputAddAccount($_POST);
     $lastName = $allInput['lastName'] ?? '';
     $firstName = $allInput['firstName'] ?? '';
     $email = $allInput['email'] ?? '';
-    //  Permet de vérifier si l'adresse email est déjà utilisée
+    //  Permets de vérifier si l'adresse email est déjà utilisée
     $userAlreadyCreate = $this->modelSession->retrieveUserWithEmail($email);
-    // Permet de vérifier la conformité des inputs
+    //  Permets de vérifier la conformité des inputs
     $errorAdminAddAccount = $this->errorManagement->checkErrorAllInputAddAccount($allInput, $userAlreadyCreate);
 
     if (empty(array_filter($errorAdminAddAccount, fn ($el) => $el !== ''))) {
@@ -51,9 +51,9 @@ class Admin
   public function adminConfirmAddAccount()
   {
     if (isset($_SESSION['newAccount'])) {
-      // Permet de récupérer le profil de l'utilisateur a créé
+      // Permets de récupérer le profil de l'utilisateur à créer
       $allInput = $_SESSION['newAccount'];
-      // Permet de générer un mot de passe pour le compte;
+      // Permets de générer un mot de passe pour le compte
       $passwordGenerated = $this->modelAdmin->createRandomPassword(12);
       $passwordHash = password_hash($passwordGenerated, PASSWORD_ARGON2I);
       if (password_verify($passwordGenerated, $passwordHash)) {
@@ -72,13 +72,13 @@ class Admin
   public function adminDeleteAccount()
   {
     $requestType = "adminDeleteAccount";
-    // Permet de nettoyer l'email entré et de la retourner
+    // Permets de nettoyer l'email entré et de la retourner
     $email = $this->modelAdmin->checkEmail($_POST);
-    // Permet d'afficher s'il y a un problème de format avec l'email
+    // Permets d'afficher s'il y a un problème de format avec l'email
     $errorTypeDelete = $this->errorDeleteUser->checkErrorTypeEmailDelete($email);
-    // Permet de vérifier l'existence du compte à supprimer
+    // Permets de vérifier l'existence du compte à supprimer
     $userWantDelete = $this->modelSession->retrieveUserWithEmail($email);
-    // Permet d'afficher l'erreur si aucun compte ne correspond à l'email
+    // Permets d'afficher l'erreur si aucun compte ne correspond à l'email
     $errorUserDelete = $this->errorDeleteUser->checkErrorExistenceEmailDelete($userWantDelete);
     if (empty(array_filter($errorTypeDelete, fn ($el) => $el !== '')) && empty(array_filter($errorUserDelete, fn ($el) => $el !== ''))) {
       $_SESSION['accountWantDelete'] = $email;
@@ -91,9 +91,9 @@ class Admin
   public function adminConfirmDeleteAccount()
   {
     if ($_SESSION['accountWantDelete']) {
-      // Permet de récupérer l'email de l'utilisateur à supprimer
+      // Permets de récupérer l'email de l'utilisateur à supprimer
       $email = $_SESSION['accountWantDelete'];
-      // Permet de supprimer le compte
+      // Permets de supprimer le compte
       $this->modelAdmin->deleteAccount($email);
       // Suppression de la sauvegarde des informations 
       unset($_SESSION['accountWantDelete']);

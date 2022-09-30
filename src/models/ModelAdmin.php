@@ -11,7 +11,11 @@ use App\models\Model\Model;
 class ModelAdmin extends Model
 {
   public DatabaseConnection $dbh;
-
+  /**
+   * create new account for a technician
+   * @param array $newUser new user profile
+   * @return array profile
+   */
   public function createAccount(array $newUser)
   {
     $statementCreateAccount = $this->dbh->connectDb()->prepare("INSERT INTO user VALUES(
@@ -39,6 +43,11 @@ class ModelAdmin extends Model
     return $statementCreateAccount->fetch();
   }
 
+  /**
+   * delete a technician account
+   * @param string $email
+   * @return string $email
+   */
   public function deleteAccount(string $email): string
   {
     $statementDeleteAccount = $this->dbh->connectDb()->prepare("DELETE FROM user WHERE email=:email");
@@ -47,6 +56,11 @@ class ModelAdmin extends Model
     return $email;
   }
 
+  /**
+   * check form
+   * @param array $allInput content of form
+   * @return array all form content
+   */
   public function checkAllInputAddAccount(array $allInput): array
   {
     $allInput = filter_input_array(INPUT_POST, [
@@ -58,6 +72,11 @@ class ModelAdmin extends Model
     return $allInput ?? [];
   }
 
+  /**
+   * check email 
+   * @param array $input email address
+   * @return string email
+   */
   public function checkEmail(array $input): string
   {
     $input = filter_input_array(INPUT_POST, [
@@ -68,6 +87,10 @@ class ModelAdmin extends Model
     return $email;
   }
 
+  /**
+   * search all technician profiles
+   *@return array  all technicien profiles
+   */
   public function selectUserTech(): array
   {
     $statementSelectUserTech = $this->dbh->connectDb()->prepare("SELECT firstName, lastName, email FROM user WHERE type=:userType");

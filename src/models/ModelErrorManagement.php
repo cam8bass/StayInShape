@@ -55,22 +55,31 @@ class ErrorManagement
   public string $errorDesciption = "";
   public string $errorImgFile = "";
 
+  /**
+   * check if the email address and password are correct
+   * @param string $email 
+   * @param string $password
+   * @return array error 
+   */
   public function checkErrorTypeLogin(string $email, string $password): array
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $this->errorTypeLogin['errorEmail'] = ERROR_EMAIL; 
+        $this->errorTypeLogin['errorEmail'] = ERROR_EMAIL;
       }
-      // A MODIFIER
-      if (!$password || mb_strlen($password) < 8) {
-        $this->errorTypeLogin['errorPassword'] = ERROR_PASSWORD_TYPE; 
-      }
-      // $this->errorTypeLogin['errorPassword'] =  $this->checkPassword($password, $this->errorTypeLogin['errorPassword']);
+
+      $this->errorTypeLogin['errorPassword'] =  $this->checkPassword($password, $this->errorTypeLogin['errorPassword']);
       return $this->errorTypeLogin;
     }
   }
 
+  /**
+   * check if the user is authorised to connect to his account
+   *@param string $password 
+   *@param array $user user's profile
+   *@return array error
+   */
   public function checkErrorUserLogin(string $password, $user): array
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -78,11 +87,11 @@ class ErrorManagement
       if (empty(array_filter($this->errorTypeLogin, fn ($el) => $el != ''))) {
 
         if (!$user) {
-          // Si l'adresse email n'est rattaché à aucun compte
-          $this->errorUserLogin['errorEmail'] = ERROR_EMAIL_NOT_EXIST; 
+          // Si l'adresse email n'est rattachée à aucun compte
+          $this->errorUserLogin['errorEmail'] = ERROR_EMAIL_NOT_EXIST;
         } elseif (!password_verify($password, $user['password'])) {
           // Si le mot de passe est incorrect
-          $this->errorUserLogin['errorPassword'] = ERROR_PASSWORD_WRONG; 
+          $this->errorUserLogin['errorPassword'] = ERROR_PASSWORD_WRONG;
         } elseif ($user['status'] === "disabled") {
           // Si le compte est désactivé
           $this->errorUserLogin["errorEmail"] = ERROR_ACCOUNT_DISABLE;
@@ -92,7 +101,12 @@ class ErrorManagement
     }
   }
 
-  public function checkErrorIfAdminAccount($user)
+  /**
+   * check if the user  has an administrator account
+   * @param array|string $user 
+   * @return array error 
+   */
+  public function checkErrorIfAdminAccount(array|string $user): array
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       if (empty(array_filter($this->errorUserLogin, fn ($el) => $el != ''))) {
@@ -106,7 +120,12 @@ class ErrorManagement
     }
   }
 
-  public function checkErrorIfUserAccount($user)
+  /**
+   * check if the user  has an user account
+   * @param array $user
+   * @return array error
+   */
+  public function checkErrorIfUserAccount(array $user): array
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       if (empty(array_filter($this->errorUserLogin, fn ($el) => $el != ''))) {
@@ -120,19 +139,28 @@ class ErrorManagement
     }
   }
 
-  public function checkErrorTypeEmailDelete($email)
+  /**
+   * check email 
+   * @param string $email
+   * @return array error
+   */
+  public function checkErrorTypeEmailDelete(string $email): array
   {
     if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $this->errorTypeDelete['errorEmail'] = ERROR_EMAIL; 
+      $this->errorTypeDelete['errorEmail'] = ERROR_EMAIL;
     }
     return $this->errorTypeDelete;
   }
 
-  public function checkErrorExistenceEmailDelete($userWantDelete)
+  /**
+   * checks if an email address exists
+   * @param array|string $userWantDelete user profile to delete
+   */
+  public function checkErrorExistenceEmailDelete(array|string $userWantDelete): array
   {
     if (empty(array_filter($this->errorTypeDelete, fn ($el) => $el != ''))) {
       if (!$userWantDelete) {
-        $this->errorUserDelete['errorEmail'] = ERROR_EMAIL_NOT_EXIST; 
+        $this->errorUserDelete['errorEmail'] = ERROR_EMAIL_NOT_EXIST;
       } elseif ($userWantDelete['type'] === "Partner" || $userWantDelete['type'] === 'Club') {
         $this->errorUserDelete['errorEmail'] = ERROR_TECH_ACCOUNT_TYPE;
       }
@@ -140,19 +168,25 @@ class ErrorManagement
     return $this->errorUserDelete;
   }
 
-  public function checkErrorAllInputAddAccount($allInput, $userAllReadyCreate)
+  /**
+   * check form data for the new profile and check if email is not already in use
+   * @param array $allInput form data of the new profile
+   * @param array|string $userAllReadyCreate
+   * @return array error
+   */
+  public function checkErrorAllInputAddAccount(array $allInput, array|string $userAllReadyCreate): array
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $firstName = $allInput['firstName'] ?? '';
       $lastName = $allInput['lastName'] ?? '';
       $email = $allInput['email'] ?? '';
-    
+
       if (!$firstName || mb_strlen($firstName) < 2) {
-        $this->errorAdminAddAccount['errorFirstName'] = ERROR_LENGTH; 
+        $this->errorAdminAddAccount['errorFirstName'] = ERROR_LENGTH;
       }
 
       if (!$lastName || mb_strlen($lastName) < 2) {
-        $this->errorAdminAddAccount['errorLastName'] = ERROR_LENGTH; 
+        $this->errorAdminAddAccount['errorLastName'] = ERROR_LENGTH;
       }
 
       if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -164,7 +198,13 @@ class ErrorManagement
     return $this->errorAdminAddAccount;
   }
 
-  public function checkErrorCreateProfile($allInput, $userAllReadyCreate)
+  /**
+   * verify profile before creating
+   * @param array $allInput form data of the new profile
+   * @param array|string $userAllReadyCreate
+   * @return array error
+   */
+  public function checkErrorCreateProfile(array $allInput, array|string $userAllReadyCreate): array
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $firstName = $allInput['firstName'] ?? '';
@@ -173,11 +213,11 @@ class ErrorManagement
       $compagnyName = $allInput['compagnyName'] ?? '';
 
       if (!$firstName || mb_strlen($firstName) < 2) {
-        $this->errorCreateProfile['errorFirstName'] = ERROR_LENGTH; 
+        $this->errorCreateProfile['errorFirstName'] = ERROR_LENGTH;
       }
 
       if (!$lastName || mb_strlen($lastName) < 2) {
-        $this->errorCreateProfile['errorLastName'] = ERROR_LENGTH; 
+        $this->errorCreateProfile['errorLastName'] = ERROR_LENGTH;
       }
 
       if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -187,13 +227,19 @@ class ErrorManagement
       }
 
       if (!$compagnyName || mb_strlen($compagnyName) < 2) {
-        $this->errorCreateProfile['errorCompagnyName'] = ERROR_LENGTH; 
+        $this->errorCreateProfile['errorCompagnyName'] = ERROR_LENGTH;
       }
     }
     return $this->errorCreateProfile;
   }
 
-  public function checkImgFile($img)
+
+  /**
+   * check if the image before downloading it
+   * @param array $img img path
+   * @return string error 
+   */
+  public function checkImgFile(array $img): string
   {
     $valideImgExtension = ["jpeg", "JPEG", "png", "PNG", "jpg", "JPG"];
 
@@ -217,7 +263,13 @@ class ErrorManagement
     return $this->errorImgFile;
   }
 
-  public function checkUserPassword($oldPassword, $allInput)
+  /**
+   * check user password
+   * @param string $oldPassword
+   * @param array $allInput
+   * @return array error
+   */
+  public function checkUserPassword(string $oldPassword, array $allInput): array
   {
     if (!password_verify($allInput["oldPassword"], $oldPassword)) {
       $this->errorChangePassword["errorOldPassword"] = ERROR_PASSWORD_WRONG;
@@ -226,7 +278,12 @@ class ErrorManagement
     return $this->errorChangePassword;
   }
 
-  public function checkUserDescription($newDescription)
+  /**
+   * check new description
+   * @param string $newDescription
+   * @return string error
+   */
+  public function checkUserDescription(string $newDescription): string
   {
     if (!$newDescription) {
       $this->errorDesciption = ERROR_INPUT_EMPTY;
@@ -236,17 +293,22 @@ class ErrorManagement
     return $this->errorDesciption;
   }
 
-  public function checkPassword($password)
+  /**
+   * check password
+   * @param string $password
+   * @return string error
+   */
+  public function checkPassword(string $password)
   {
-    // Permet de vérifier qu'il y a un moins un caractère en Majuscules
+    // Permets de vérifier qu'il y a un moins un caractère en Majuscules
     $uppercase = preg_match('@[A-Z]@', $password);
-    // Permet de vérifier qu'il y a un moins un caractère en Minuscule
+    // Permets de vérifier qu'il y a un moins un caractère en Minuscule
     $lowercase = preg_match('@[a-z]@', $password);
-    // Permet de vérifier qu'il y a un moins un nombre 
+    // Permets de vérifier qu'il y a un moins un nombre 
     $number    = preg_match('@[0-9]@', $password);
-    // Permet de vérifier qu'il y a un caractère spécial
+    // Permets de vérifier qu'il y a un caractère spécial
     $specialCharacter = preg_match('/[\'\/~`\!@#%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/', $password);
-    // Permet de définir la taille minimum du mot de passe
+    // Permets de définir la taille minimum du mot de passe
     $passwordLength = mb_strlen($password) > 7;
 
     $error = ERROR_PASSWORD_TYPE;
@@ -255,13 +317,4 @@ class ErrorManagement
       return $error;
     } else return "";
   }
-
-
 }
-
-
-
-
-
-
-

@@ -42,7 +42,7 @@ const loadAllClubs = async function () {
 loadAllClubs();
 
 const loadAllPartner = async function () {
-  //Permet de recupérer tous les partenaires
+  //Permet de récupérer tous les partenaires
   const results = await AJAX("src/helpers/techPartnerFilter.php");
   const allActivePartner = filterActiveProfile(results);
   const allDisabledPartner = filterProfileDisable(results);

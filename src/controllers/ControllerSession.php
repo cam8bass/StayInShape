@@ -21,19 +21,23 @@ class Session
     $this->errorManagement = new ErrorManagement();
   }
 
+  /**
+   * @param string $success redirect to success page 
+   * @param string $failed redirect to loginAdmin page
+   */
   public function loginAdmin($success, $failed)
   {
-    // Permet de vérifier les inputs
+    // Permets de vérifier les inputs
     $allInput = $this->modelSession->checkAllInputLogin($_POST);
     $email = $allInput['email'] ?? '';
     $password = $allInput['password'] ?? '';
 
-    // Permet de créer un message d'erreur si le format des inputs est pas respecté
+    // Permets de créer un message d'erreur si le format des inputs n’est pas respecté
     $errorTypeLogin = $this->errorManagement->checkErrorTypeLogin($email, $password);
 
-    // Permet de rechercher un utilisateur grace à l'email rentré
+    // Permets de rechercher un utilisateur grâce à l'email rentré
     $user = $this->modelSession->retrieveUserWithEmail($email) ?? '';
-    // Permet de vérifier si le compte est pas désactivé et que l'adress email est valide ainsi que le mot de passe 
+    //Permets de vérifier si le compte n’est pas désactivé et que l'adresse email est valide ainsi que le mot de passe 
     $errorUserLogin = $this->errorManagement->checkErrorUserLogin($password, $user);
     $errorIfUserAccount = $this->errorManagement->checkErrorIfUserAccount($user);
 
@@ -46,17 +50,21 @@ class Session
     }
   }
 
+  /**
+   * @param string $success redirect to success page 
+   * @param string $failed redirect to login page
+   */
   public function loginUser($success, $failed)
   {
-    // Permet de vérifier les inputs
+    // Permets de vérifier les inputs
     $allInput = $this->modelSession->checkAllInputLogin($_POST);
     $email = $allInput['email'] ?? '';
     $password = $allInput['password'] ?? '';
-    // Permet de créer un message d'erreur si le format des inputs est pas respecté
+    // Permets de créer un message d'erreur si le format des inputs n’est pas respecté
     $errorTypeLogin = $this->errorManagement->checkErrorTypeLogin($email, $password);
-    // Permet de rechercher un utilisateur grace à l'email rentré
+    // Permets de rechercher un utilisateur grâce à l'email rentré
     $user = $this->modelSession->retrieveUserWithEmail($email) ?? '';
-    // Permet de vérifier si le compte est pas désactivé et que l'adress email est valide ainsi que le mot de passe 
+    // Permets de vérifier si le compte n’est pas désactivé et que l'adresse email est valide ainsi que le mot de passe 
     $errorUserLogin = $this->errorManagement->checkErrorUserLogin($password, $user);
     $errorIfAdminAccount = $this->errorManagement->checkErrorIfAdminAccount($user);
 
@@ -71,7 +79,7 @@ class Session
 
   public function alreadyLoggin()
   {
-    // Permet de vérifier si l'utilisateur est deja connecté
+    // Permets de vérifier si l'utilisateur est déjà connecté
     $currentUser = $this->modelSession->isLoggedin();
 
     if ($currentUser) {
@@ -81,9 +89,13 @@ class Session
     } else return;
   }
 
+  /**
+   * @param string $redirect redirect to login page
+   * 
+   */
   public function logout($redirect)
   {
-    // Permet de supprimer la session et les cookies de session
+    // Permets de supprimer la session et les cookies de session
     $idSession = $_COOKIE['session'] ?? '';
     $this->modelSession->logout($idSession);
     header($redirect);
@@ -137,4 +149,3 @@ class Session
     }
   }
 }
-
