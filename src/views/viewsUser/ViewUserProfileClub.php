@@ -7,20 +7,13 @@
 
     <!-- Start btn return for desk -->
     <a href="../../index.php?status=on&action=home" class="btn header__return">
-      <svg class="header__return-icon">
-        <use xlink:href="./public/img/svg/sprite.svg#icon-long-arrow-left
-          "></use>
-      </svg>
+    <img src="public/img/icons/icon-left-arrow.png" alt="button return" class="header__return-icon">
       Retour</a>
     <!-- End btn return for desk -->
 
     <!-- Start btn return for mob -->
     <a href="../../index.php?status=on&action=home" class=" header__return-blue">
-
-      <svg class="header__return-icon--blue">
-        <use xlink:href="./public/img/svg/sprite.svg#icon-long-arrow-left
-          "></use>
-      </svg>
+    <img src="public/img/icons/icon-left-arrow-blue.png" alt="button return" class="header__return-icon">
     </a>
     <!-- End btn return for mob  -->
 

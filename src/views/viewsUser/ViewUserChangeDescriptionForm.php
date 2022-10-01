@@ -14,20 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
 
       <!-- Start btn return for desk -->
       <a href="../../index.php?status=on&action=settings" class="btn header__return create__btn-return">
-        <svg class="header__return-icon">
-          <use xlink:href="./public/img/svg/sprite.svg#icon-long-arrow-left
-                 "></use>
-        </svg>
+        <img src="public/img/icons/icon-left-arrow.png" alt="button return" class="header__return-icon">
         Retour</a>
       <!-- End btn return for desk -->
 
       <!-- Start btn return for mob -->
       <a href="../../index.php?status=on&action=settings" class=" header__return-blue create__btn-return">
-
-        <svg class="header__return-icon--blue">
-          <use xlink:href="./public/img/svg/sprite.svg#icon-long-arrow-left
-                 "></use>
-        </svg>
+        <img src="public/img/icons/icon-left-arrow-blue.png" alt="button return" class="header__return-icon">
       </a>
       <h1 class="popupAccount__title">Description du profil</h1>
 
