@@ -23,9 +23,7 @@
   }
 
   &__createClub {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexRowCenter;
     min-height: 100vh;
   }
 

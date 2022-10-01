@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     <form action="../../index.php?status=on&action=changePictureForm" method="POST" class="popupAccount" enctype="multipart/form-data">
       <!-- Start btn return for desk -->
-      <a href="../../index.php?status=on&action=settings" class="btn header__return">
+      <a href="../../index.php?status=on&action=settings" class="btn header__return ">
         <svg class="header__return-icon">
           <use xlink:href="./public/img/svg/sprite.svg#icon-long-arrow-left
                  "></use>
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
       <!-- End btn return for desk -->
 
       <!-- Start btn return for mob -->
-      <a href="../../index.php?status=on&action=settings" class=" header__return-blue">
+      <a href="../../index.php?status=on&action=settings" class=" header__return-blue create__btn-return">
 
         <svg class="header__return-icon--blue">
           <use xlink:href="./public/img/svg/sprite.svg#icon-long-arrow-left"></use>

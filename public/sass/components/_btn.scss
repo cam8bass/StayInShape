@@ -11,8 +11,11 @@
   text-decoration: none;
   cursor: pointer;
   @media only screen and (max-width: 600px) {
-    font-size: 1.6rem;
-    padding: 0.6rem;
+    // font-size: 1.6rem;
+    // padding: 0.6rem;
+    //ajout
+    font-size: 1.8rem;
+    padding: 0.5rem 1rem;
   }
   &:hover,
   &:active {

@@ -29,9 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     </div>
 
     <form action="../../index.php?status=on&action=clubCreationForm&id=<?= $partnerProfile['idPartner'] ?>" method="post" id="createClub" class="create">
-
       <!-- Start btn return for desk -->
-      <a href="../../index.php?status=on&action=showPartnerProfile&id=<?= $partnerProfile['idPartner'] ?>" class="btn header__return">
+      <a href="../../index.php?status=on&action=showPartnerProfile&id=<?= $partnerProfile['idPartner'] ?>" class="btn header__return create__btn-return">
         <svg class="header__return-icon">
           <use xlink:href="./public/img/svg/sprite.svg#icon-long-arrow-left
                  "></use>
@@ -40,13 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
       <!-- End btn return for desk -->
 
       <!-- Start btn return for mob -->
-      <a href="../../index.php?status=on&action=showPartnerProfile&id=<?= $partnerProfile['idPartner'] ?>" class=" header__return-blue">
+      <a href="../../index.php?status=on&action=showPartnerProfile&id=<?= $partnerProfile['idPartner'] ?>" class=" header__return-blue create__btn-return">
         <svg class="header__return-icon--blue">
           <use xlink:href="./public/img/svg/sprite.svg#icon-long-arrow-left
                  "></use>
         </svg>
       </a>
       <!-- End btn return for mob  -->
+
       <h1 class="create__title">Créer un club</h1>
 
       <div class="create__block">
