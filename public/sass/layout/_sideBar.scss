@@ -13,7 +13,10 @@
     //     1fr
     //   );
     // padding: 0 2rem;
-    grid-template-columns: minmax(min-content,20vw) minmax(min-content,1fr) minmax(min-content,20vw);
+    grid-template-columns: minmax(min-content, 20vw) minmax(min-content, 1fr) minmax(
+        min-content,
+        20vw
+      );
     width: 100%;
     height: 18.6rem;
   }
@@ -47,7 +50,7 @@
       height: 5rem;
       border: 1.5px solid $color-blue-light;
       //ajout
-      margin: 0 1rem ;
+      margin: 0 1rem;
     }
 
     &:hover,
@@ -139,5 +142,9 @@
         }
       }
     }
+  }
+
+  &__link {
+    justify-self: center;
   }
 }

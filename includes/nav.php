@@ -11,6 +11,7 @@ $currentUser = $_SESSION['currentUser'] ?? '';
   </label>
   <div class="navigation__background">&nbsp;</div>
 
+  <!-- Start Admin nav -->
   <nav class="navigation__nav">
     <?php if ($currentUser['type'] === "admin" && $currentUser['create'] === 1) : ?>
 
@@ -28,35 +29,51 @@ $currentUser = $_SESSION['currentUser'] ?? '';
         </li>
 
         <li class="navigation__item">
+          <img src="public/img/icons/icon-help.png" alt="icone help" class="navigation__icon-link">
+          <a href="../../indexAdmin.php?status=on&action=help" class="navigation__link">Manuel d'utilisation</a>
+        </li>
+
+        <li class="navigation__item">
           <img src="./public/img/icons/icon-logout.png" alt="icone logout" class="navigation__icon-link" />
           <a href="../indexAdmin.php?status=on&action=logout" class="navigation__link"> Déconnection</a>
         </li>
 
       </ul>
+      <!-- End Admin nav -->
 
+      <!-- Start techn nav -->
     <?php elseif ($currentUser['type'] === "tech" && $currentUser['write'] === 1 && $currentUser['read'] === 1 && $currentUser['create'] === 0) : ?>
 
-      <!-- A modifier -->
       <ul class="navigation__list">
         <li class="navigation__item">
           <img src="./public/img/icons/icon-partner.png" alt="icone partner" class="navigation__icon-link" />
           <a href="../index.php?status=on&action=displayAllPartner" class="navigation__link"> Gérer franchises</a>
         </li>
+
         <li class="navigation__item">
           <img src="./public/img/icons/icon-structure.png" alt="icone structure" class="navigation__icon-link" />
           <a href="../index.php?status=on&action=displayAllClubs" class="navigation__link"> Gérer les clubs</a>
         </li>
+
         <li class="navigation__item">
           <img src="./public/img/icons/icon-create.png" alt="icone create" class="navigation__icon-link" />
           <a href="../index.php?status=on&action=partnerCreationForm" class="navigation__link"> Nouvelle franchise</a>
         </li>
-        <!-- A modifier -->
+
+        <li class="navigation__item">
+          <img src="public/img/icons/icon-help.png" alt="icone help" class="navigation__icon-link">
+          <a href="../../index.php?status=on&action=help" class="navigation__link">Manuel d'utilisation</a>
+        </li>
+
         <li class="navigation__item">
           <img src="./public/img/icons/icon-logout.png" alt="icone logout" class="navigation__icon-link" />
           <a href="../index.php?status=on&action=logout" class="navigation__link"> Déconnection</a>
         </li>
+
       </ul>
-      
+      <!-- End tech nav -->
+
+      <!-- Start user nav -->
     <?php elseif (($currentUser['type'] === "Partner" || $currentUser['type'] === "Club") && $currentUser["read"] === 1 && $currentUser['write'] === 0 && $currentUser['create'] === 0) : ?>
 
       <ul class="navigation__list">
@@ -72,11 +89,18 @@ $currentUser = $_SESSION['currentUser'] ?? '';
         </li>
 
         <li class="navigation__item">
+          <img src="public/img/icons/icon-help.png" alt="icone help" class="navigation__icon-link">
+          <a href="../../index.php?status=on&action=help" class="navigation__link">Manuel d'utilisation</a>
+        </li>
+
+        <li class="navigation__item">
           <img src="./public/img/icons/icon-logout.png" alt="icone logout" class="navigation__icon-link" />
           <a href="../index.php?status=on&action=logout" class="navigation__link"> Déconnection</a>
         </li>
 
       </ul>
+
+      <!-- End user nav -->
     <?php endif ?>
   </nav>
 

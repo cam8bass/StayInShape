@@ -135,6 +135,8 @@ try {
             } elseif ($_GET['action'] === "changeClubOwner") {
               // Permet de changer le propriétaire du club selectionné
               (new Technician())->techChangeClubOwner();
+            } elseif ($_GET['action'] === "help") {
+              require('src/views/ViewHelp.php');
             } elseif ($_GET['action'] === 'info') {
               (new Technician())->techDisplayProfileInfo();
             } else (throw new Exception(ERROR_REDIRECT));
