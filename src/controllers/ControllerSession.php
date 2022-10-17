@@ -83,7 +83,14 @@ class Session
     $currentUser = $this->modelSession->isLoggedin();
 
     if ($currentUser) {
-      session_start();
+      session_start([
+        'gc_maxlifetime' => 60 * 60 * 24 * 14,
+        'use_strict_mode' => true,
+        'use_only_cookies' => true,
+        'cookie_lifetime' => 60 * 60 * 24 * 14,
+        'cookie_httponly' => true,
+        "cookie_secure"=>true
+      ]);
       $_SESSION['currentUser'] = $currentUser ?? "";
       return $currentUser;
     } else return;

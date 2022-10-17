@@ -40,7 +40,7 @@ COMMENT 'Nettoie la table session tous les jours'
 DO
 DELETE FROM yourDatabaseName.session WHERE DATE_ADD(createdAt, INTERVAL 2 WEEK) < NOW();
 ```
-
+’
 ## Create table "partner"
 
 ```bash

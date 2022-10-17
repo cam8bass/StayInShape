@@ -109,9 +109,9 @@ class ModelSession
         // Permets d'envoyer l'id dans la session côté Bdd
         $this->createNewSession($user, $idSession);
         //  Permets de créer 2 cookies (signature et session)
-        $signature = hash_hmac('sha256', $idSession, "82b9cca8c89955d90458c1420d9399b16bc83c8e7c58f709b4f3022a430a0d4fd421993ef5ecc2553798044f4b5c98f23f9215b9dd84bab0fba9b332e48d7087");
-        setcookie('signature', $signature, time() + 60 * 60 * 24 * 14, '/', '', false, true);
-        setcookie('session', $idSession, time() + 60 * 60 * 24 * 14, '/', '', false, true);
+        $signature = hash_hmac('sha256', $idSession, SECRET);
+        setcookie('signature', $signature, time() + 60 * 60 * 24 * 14, '/', '', true, true);
+        setcookie('session', $idSession, time() + 60 * 60 * 24 * 14, '/', '', true, true);
       }
     }
   }
@@ -122,7 +122,7 @@ class ModelSession
     $signature = $_COOKIE['signature'] ?? '';
 
     if ($idSession && $signature) {
-      $hash = hash_hmac('sha256', $idSession, "82b9cca8c89955d90458c1420d9399b16bc83c8e7c58f709b4f3022a430a0d4fd421993ef5ecc2553798044f4b5c98f23f9215b9dd84bab0fba9b332e48d7087");
+      $hash = hash_hmac('sha256', $idSession, SECRET);
 
       if (hash_equals($hash, $signature)) {
         $session = $this->readSession($idSession);

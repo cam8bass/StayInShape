@@ -91,7 +91,7 @@ class FilterPartner extends View {
             </li>
 
             <li class="list__item">
-              <p class="list__text">Profile :  ${
+              <p class="list__text">Profil :  ${
                 profile.status === "enabled" ? "Actif" : "Désactivé"
               } </p>
             </li>

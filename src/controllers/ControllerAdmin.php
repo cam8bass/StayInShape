@@ -24,7 +24,6 @@ class Admin
     $this->modelSession = new modelSession();
     $this->modelSession->dbh = $this->dbh;
     $this->errorManagement = new ErrorManagement();
-    $this->errorDeleteUser = new ErrorManagement();
   }
 
   public function adminAddAccount()
@@ -75,11 +74,11 @@ class Admin
     // Permets de nettoyer l'email entré et de la retourner
     $email = $this->modelAdmin->checkEmail($_POST);
     // Permets d'afficher s'il y a un problème de format avec l'email
-    $errorTypeDelete = $this->errorDeleteUser->checkErrorTypeEmailDelete($email);
+    $errorTypeDelete = $this->errorManagement->checkErrorTypeEmailDelete($email);
     // Permets de vérifier l'existence du compte à supprimer
     $userWantDelete = $this->modelSession->retrieveUserWithEmail($email);
     // Permets d'afficher l'erreur si aucun compte ne correspond à l'email
-    $errorUserDelete = $this->errorDeleteUser->checkErrorExistenceEmailDelete($userWantDelete);
+    $errorUserDelete = $this->errorManagement->checkErrorExistenceEmailDelete($userWantDelete);
     if (empty(array_filter($errorTypeDelete, fn ($el) => $el !== '')) && empty(array_filter($errorUserDelete, fn ($el) => $el !== ''))) {
       $_SESSION['accountWantDelete'] = $email;
       require("src/views/ViewConfirmationPage.php");
