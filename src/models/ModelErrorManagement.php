@@ -254,8 +254,8 @@ class ErrorManagement
         $this->errorImgFile = ERROR_IMG_EXTENSION;
       } elseif ($img['img']['size'] > 2097152) {
         $this->errorImgFile = ERROR_IMG_SIZE;
-      } elseif (!array_search(pathinfo($img['img']['name'], PATHINFO_EXTENSION), $valideImgExtension)) {
-        $this->errorImgFile = UPLOAD_ERR_EXTENSION;
+      } elseif (empty(array_filter($valideImgExtension, fn ($el) => $el === pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION)))) {
+        $this->errorImgFile = ERROR_IMG_EXTENSION;
       }
     } else {
       $this->errorImgFile = ERROR_IMG;
