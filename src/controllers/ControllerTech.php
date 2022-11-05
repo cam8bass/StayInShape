@@ -15,7 +15,6 @@ use App\lib\Database\DatabaseConnection;
 use App\models\ModelTech\ModelTech;
 use App\models\ModelSession\ModelSession;
 use App\models\ModelErrorManagement\ErrorManagement;
-use App\views\viewsTech\ViewsMail\ViewsMail;
 use App\congig\Mail\Mail;
 
 use Exception;
@@ -31,7 +30,7 @@ class Technician
     $this->modelSession->dbh = $this->dbh;
     $this->errorManagement = new ErrorManagement();
     $this->mail = new Mail();
-    $this->viewMail = new ViewsMail();
+
   }
 
   /**
