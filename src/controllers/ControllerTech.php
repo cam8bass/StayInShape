@@ -16,6 +16,7 @@ use App\models\ModelTech\ModelTech;
 use App\models\ModelSession\ModelSession;
 use App\models\ModelErrorManagement\ErrorManagement;
 use App\congig\Mail\Mail;
+use App\views\viewsTech\ViewsMail\ViewsMail;
 
 use Exception;
 
@@ -30,7 +31,7 @@ class Technician
     $this->modelSession->dbh = $this->dbh;
     $this->errorManagement = new ErrorManagement();
     $this->mail = new Mail();
-
+    $this->viewMail = new ViewsMail();
   }
 
   /**
@@ -121,7 +122,7 @@ class Technician
           // Permets de créer le fichier permission.json et de le remplir avec les permissions 
           $idPermission = $this->modelTech->createPermissionsFile($clubPermissions) ?? time();
           // Permets de remplir le profil de l'utilisateur et de l'envoyer à la Bdd
-          $this->modelTech->createClub($idClub, $newClub, $idPermission,$activationKey);
+          $this->modelTech->createClub($idClub, $newClub, $idPermission, $activationKey);
           //  Récupère le nom des clubs déjà rattaché au partner parent
           $attachedClub = $this->modelTech->retrieveAttachedClubToPartner($profileParent['idPartner']);
           $idNewAttachedClub = $attachedClub['attachedClub'] === "" ? $idClub  : implode(',', [$attachedClub['attachedClub'], $idClub]);
@@ -174,9 +175,9 @@ class Technician
     require('src/views/viewsTech/ViewTechDisplayAllClubs.php');
   }
 
-/**
- * @param string $location link partnerProfile
- */
+  /**
+   * @param string $location link partnerProfile
+   */
   public function techShowPartnerProfile($location)
   {
     // Permets de récupérer l'id du partenaire sélectionné dans l'URL
@@ -197,8 +198,8 @@ class Technician
   }
 
   /**
- * @param string $location link clubProfile
- */
+   * @param string $location link clubProfile
+   */
   public function techShowClubProfile(string $location)
   {
     // Permets de récupérer l'id du partenaire sélectionné dans l'URL
