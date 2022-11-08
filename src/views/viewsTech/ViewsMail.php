@@ -17,7 +17,7 @@ class ViewsMail
         <h1>Confirmation de création d'un nouveau club</h1>
         <p>Suite à votre demande de création de compte pour le club $clubName, les permissions appliquées sont $permission</p>
         <p>Afin de confirmer la création de ce compte veuillez cliquer sur ce lien</p>
-        <a class='content__link' href='https://camei8ht.fr/index.php?status=off&action=mailConfirmCreateClub&id=$idClub&key=$activationKey' target='_blank' >Confirmation</a>
+        <a class='content__link' href='https://stayinshape.camei8ht.fr/index.php?status=off&action=mailConfirmCreateClub&id=$idClub&key=$activationKey' target='_blank' >Confirmation</a>
      
             ";
   }
