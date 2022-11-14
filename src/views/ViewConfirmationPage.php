@@ -100,7 +100,6 @@ if ($requestType === "adminAddAccount") {
   $popupLinkAgree = "../../index.php?status=on&action=createPartner";
   //
 } elseif ($requestType === 'logout') {
-
   $title = "Déconnexion";
   $popupTitle = "Déconnexion";
   $popupText = " Êtes-vous sûr de vouloir vous déconnecter ?";
@@ -110,4 +109,4 @@ if ($requestType === "adminAddAccount") {
 
 $content = require('templates/layoutPopup.php');
 
-require("templates/layout.php");
+
