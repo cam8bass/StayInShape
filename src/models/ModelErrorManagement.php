@@ -109,7 +109,7 @@ class ErrorManagement
   public function checkErrorIfAdminAccount(array|string $user): array
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      if (empty(array_filter($this->errorUserLogin, fn ($el) => $el != ''))) {
+      if (empty(array_filter($this->errorUserLogin, fn ($el) => $el !== ''))) {
         if (isset($user['type'])) {
           if ($user['type'] === "admin") {
             $this->errorIfAdminAccount['errorEmail'] = ERROR_ACCOUNT_TYPE;
@@ -125,10 +125,11 @@ class ErrorManagement
    * @param array $user
    * @return array error
    */
-  public function checkErrorIfUserAccount(array $user): array
+  public function checkErrorIfUserAccount(array|string $user): array
   {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      if (empty(array_filter($this->errorUserLogin, fn ($el) => $el != ''))) {
+    
+      if (empty(array_filter($this->errorUserLogin, fn ($el) => $el !== ''))) {
         if (isset($user['type'])) {
           if (($user['type'] === "tech") || ($user['type'] === "Partner") || ($user['type'] === "Club")) {
             $this->errorIfUserAccount['errorEmail'] = ERROR_ACCOUNT_TYPE;

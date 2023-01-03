@@ -142,8 +142,9 @@ class ModelTech extends Model
    */
   public function changeStatus(string $idProfile, string $newStatus)
   {
-    $statementChangeStatus = $this->dbh->connectDb()->prepare("UPDATE user SET status=:newStatus  WHERE id=$idProfile");
+    $statementChangeStatus = $this->dbh->connectDb()->prepare("UPDATE user SET status=:newStatus  WHERE id=:idProfile");
     $statementChangeStatus->bindValue(":newStatus", $newStatus);
+    $statementChangeStatus->bindValue(":idProfile", $idProfile);
     $statementChangeStatus->execute();
   }
 
@@ -184,7 +185,8 @@ class ModelTech extends Model
    */
   public function retrieveUserStatus(string $idProfile)
   {
-    $statementRetrieveUserStatus = $this->dbh->connectDb()->prepare("SELECT status from user WHERE id=$idProfile");
+    $statementRetrieveUserStatus = $this->dbh->connectDb()->prepare("SELECT status from user WHERE id=:idProfile");
+    $statementRetrieveUserStatus->bindValue(":idProfile", $idProfile);
     $statementRetrieveUserStatus->execute();
     return $statementRetrieveUserStatus->fetch();
   }
@@ -247,8 +249,9 @@ class ModelTech extends Model
    */
   public function updatePermissions(string $newIdPermission, string $idClub)
   {
-    $statementUpdatePermissions = $this->dbh->connectDb()->prepare("UPDATE club SET idPermission = :newIdPermission WHERE idClub=$idClub ");
+    $statementUpdatePermissions = $this->dbh->connectDb()->prepare("UPDATE club SET idPermission = :newIdPermission WHERE idClub=:idClub ");
     $statementUpdatePermissions->bindValue(":newIdPermission", $newIdPermission);
+    $statementUpdatePermissions->bindValue(":idClub", $idClub);
     $statementUpdatePermissions->execute();
     return $statementUpdatePermissions->fetch();
   }

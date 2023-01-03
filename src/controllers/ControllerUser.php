@@ -12,6 +12,10 @@ use App\models\ModelErrorManagement\ErrorManagement;
 
 class User
 {
+  protected  $dbh;
+  protected  $modelUser;
+  protected  $errorManagement;
+
   function __construct()
   {
     $this->dbh = new DatabaseConnection();
@@ -64,7 +68,7 @@ class User
     $userType = $_SESSION['currentUser']['type'] ?? '';
     // Permets de vérifier l'image envoyée
     $errorImgFile = $this->errorManagement->checkImgFile($_FILES);
-    
+
     if ($errorImgFile) {
       // Si le fichier envoyé provoque une erreur
       require("src/views/viewsUser/ViewUserChangePictureForm.php");

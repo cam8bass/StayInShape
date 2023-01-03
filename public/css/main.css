@@ -1005,12 +1005,6 @@ body {
           justify-content: center;
   gap: 3rem;
 }
-@media only screen and (max-width: 600px) {
-  .list {
-    grid-template-columns: repeat(auto-fill, minmax(-webkit-min-content, 46rem));
-    grid-template-columns: repeat(auto-fill, minmax(min-content, 46rem));
-  }
-}
 .list__link {
   text-decoration: none;
 }
@@ -1601,6 +1595,7 @@ body {
   margin-top: 1rem;
   display: block;
   margin-bottom: 2rem;
+  word-break: break-all;
 }
 .account__list {
   grid-column: 2/3;

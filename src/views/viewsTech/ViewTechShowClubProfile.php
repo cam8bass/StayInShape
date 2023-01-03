@@ -6,13 +6,13 @@
 
     <!-- Start btn return for desk -->
     <a href="../../index.php?status=on&action=<?= isset($_SESSION['idPartnerParent']) ? "showPartnerProfile&id=$club[idPartnerParent]" : "displayAllClubs" ?>" class="btn header__return">
-    <img src="public/img/icons/icon-left-arrow.png" alt="button return" class="header__return-icon">
+      <img src="public/img/icons/icon-left-arrow.png" alt="button return" class="header__return-icon">
       Retour</a>
     <!-- End btn return for desk -->
 
     <!-- Start btn return for mob -->
     <a href="../../index.php?status=on&action=<?= isset($_SESSION['idPartnerParent'])  ? "showPartnerProfile&id=$club[idPartnerParent]" : "displayAllClubs" ?>" class=" header__return-blue">
-    <img src="public/img/icons/icon-left-arrow-blue.png" alt="button return" class="header__return-icon">
+      <img src="public/img/icons/icon-left-arrow-blue.png" alt="button return" class="header__return-icon">
     </a>
     <!-- End btn return for mob  -->
 
@@ -540,7 +540,7 @@
             </ul>
           </div>
         </div>
-        
+
         <!-- End Cat 9 -->
         <?php if ($club['status'] === "enabled") : ?>
           <a href="../../index.php?status=on&action=modifyPermissionsForm&id=<?= $idClub ?>" class="btn permission__submit">Modifier</a>

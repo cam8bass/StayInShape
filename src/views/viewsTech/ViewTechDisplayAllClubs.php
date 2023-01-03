@@ -28,7 +28,7 @@
     </div>
     <div class="list">
       <?php foreach ($allClubs as $club) : ?>
-        <a href="../../index.php?status=on&action=showClubProfile&id=<?= $club['idClub'] ?>" class="list__link">
+        <a href="../../index.php?status=on&action=showClubProfile&id=<?=$club['idClub'] ?>" class="list__link">
           <div class="list__block  <?= $club['status'] === 'enabled' ? "active" : "inactive" ?>">
             <img src="<?= $club['img'] ?>" alt=" picture profile" class="list__img" />
             <img src="./public/img/icons/<?= $club['status'] === "enabled" ? "icon-active-blue.png" : "icon-inactive-blue.png" ?>" alt="icone status" class="list__icon list__icon-active" />

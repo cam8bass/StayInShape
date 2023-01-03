@@ -12,6 +12,7 @@ require 'vendor/autoload.php';
 
 class Mail
 {
+  protected $mail;
 
   function __construct()
   {

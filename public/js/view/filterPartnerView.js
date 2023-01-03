@@ -45,8 +45,7 @@ class FilterPartner extends View {
   displayFilteredPartner = function (profile) {
     this._clear();
     return `
-      <a href="../../index.php?status=on&action=showPartnerProfile&id=
-      ${profile.idPartner} "
+      <a href="../../index.php?status=on&action=showPartnerProfile&id=${profile.idPartner} "
        class="list__link">
 
         <div class="list__block

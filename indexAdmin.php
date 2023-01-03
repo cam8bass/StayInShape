@@ -18,7 +18,7 @@ try {
     }
 
     if ($_GET['status'] === "on") {
-      // Permets de démarrer la session et récupérer le profil de l'utilisateur courant
+      // Permet de démarrer la session et récupérer le profil de l'utilisateur courant
       $currentUser = (new Session())->alreadyLoggin();
 
       if ($currentUser) {
@@ -28,10 +28,10 @@ try {
           if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // === Request POST ===
             if ($_GET['action'] === 'confirmAdd') {
-              // Permets de lancer la vérification avant de soumettre la création d'un nouvel utilisateur
+              // Permet de lancer la vérification avant de soumettre la création d'un nouvel utilisateur
               (new Admin())->adminAddAccount();
             } elseif ($_GET['action'] === 'delete') {
-              // Permets de lancer la vérification de l'email avant de soumettre la suppression du compte utilisateur
+              // Permet de lancer la vérification de l'email avant de soumettre la suppression du compte utilisateur
               (new Admin())->adminDeleteAccount();
             } else (throw new Exception('Erreur de redirection'));
           } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -41,25 +41,25 @@ try {
               (new Admin())->searchTech();
               require('src/views/ViewHome.php');
             } elseif ($_GET['action'] === 'logout') {
-              // Permets d'afficher la page de confirmation de déconnexion
+              // Permet d'afficher la page de confirmation de déconnexion
               $requestType = "adminLogout";
               require('src/views/ViewConfirmationPage.php');
             } elseif ($_GET['action'] === 'confirmLogout') {
               // Permet de confirmer la déconnexion de la session 
               (new Session())->logout("location: ../../../indexAdmin.php");
             } elseif ($_GET['action'] === 'add') {
-              // Permets d'afficher la page de création d’un nouveau compte
+              // Permet d'afficher la page de création d’un nouveau compte
               require('src/views/viewsAdmin/ViewAdminAddAccount.php');
             } elseif ($_GET['action'] === 'confirmAdd') {
-              // Permets de confirmer la création d'un nouveau compte
+              // Permet de confirmer la création d'un nouveau compte
               (new Admin)->adminConfirmAddAccount();
             } elseif ($_GET['action'] === 'delete') {
-              // Permets d'afficher la page de suppression de compte
+              // Permet d'afficher la page de suppression de compte
               require('src/views/viewsAdmin/ViewAdminDeleteAccount.php');
             } elseif ($_GET['action'] === "help") {
               require('src/views/ViewHelp.php');
             } elseif ($_GET['action'] === 'confirmDelete') {
-              // Permets de confirmer la suppression du compte
+              // Permet de confirmer la suppression du compte
               (new Admin())->adminConfirmDeleteAccount();
             } else (throw new Exception('Erreur de redirection'));
           }
@@ -72,13 +72,13 @@ try {
       }
     }
   } elseif (!isset($_GET['status']) && !isset($_GET["action"])) {
-    // Permets de récupérer la session de l'utilisateur pour une durée de 14 jours 
+    // Permet de récupérer la session de l'utilisateur pour une durée de 14 jours 
     $currentUser = (new Session())->alreadyLoggin();
 
     if ($currentUser) {
       header("location: ../../indexAdmin.php?status=on&action=home");
     } else {
-      // Permets d'afficher la page de login si aucune action n’est présente et s’il n'y a pas de statut
+      // Permet d'afficher la page de login si aucune action n’est présente et s’il n'y a pas de statut
       require('src/views/viewsAdmin/ViewAdminLogin.php');
     }
   }

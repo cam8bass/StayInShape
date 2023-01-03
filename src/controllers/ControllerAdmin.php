@@ -13,8 +13,13 @@ use App\models\ModelErrorManagement\ErrorManagement;
 use App\models\ModelSession\ModelSession;
 use Exception;
 
+
 class Admin
 {
+  protected  $dbh;
+  protected  $modelAdmin;
+  protected  $modelSession;
+  protected  $errorManagement;
 
   function __construct()
   {

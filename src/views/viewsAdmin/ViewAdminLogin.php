@@ -15,6 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     'errorPassword' => ''
   ];
 
+
+
   $email = "";
 }
 
@@ -57,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
       <h1 class="brand__title">Stay in shape</h1>
     </div>
   </main>
-  
+
 </div>
 
 <?php $content = ob_get_clean(); ?>

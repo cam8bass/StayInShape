@@ -22,6 +22,13 @@ use Exception;
 
 class Technician
 {
+  protected  $dbh;
+  protected  $modelTech;
+  protected  $modelSession;
+  protected  $errorManagement;
+  protected $mail;
+  protected $viewMail;
+  
   function __construct()
   {
     $this->dbh = new DatabaseConnection();
@@ -44,12 +51,14 @@ class Technician
     $partnerProfile['idPartner'] = $_GET['id'] ?? '';
     // Permets de vérifier les inputs de création d'un profile
     $allInput = $this->modelTech->checkAllInputCreateProfile($_POST);
-    $lastName = $allInput['lastName'] ?? '';
-    $firstName = $allInput['firstName'] ?? '';
+    $firstName =$allInput['firstName']??'';
+    $lastName =$allInput['lastName']??'';
+    $compagnyName =$allInput['compagnyName']??'';
+
     $email = $allInput['email'] ?? '';
-    $compagnyName = $allInput['compagnyName'] ?? '';
     //  Permets de vérifier si l'adresse email est déjà utilisée
     $userAlreadyCreate = $this->modelSession->retrieveUserWithEmail($email);
+   
     // Permets de vérifier la conformité des inputs
     $errorCreateProfile = $this->errorManagement->checkErrorCreateProfile($allInput, $userAlreadyCreate);
 
@@ -340,6 +349,7 @@ class Technician
 
     // Permets de récupérer l'id du profile parent
     $idParentClub = $this->modelTech->retrieveIdProfileParent($idClub);
+
     // Permets de récupérer le profile du partenaire parent
     $profilePartnerParent = $this->modelTech->retrievePartnerWithId($idParentClub['idPartnerParent']);
     // Permets de récupérer les informations de compte du club
@@ -365,7 +375,7 @@ class Technician
     $this->modelTech->deleteUser($idClub);
     // Redirection vers la page home
     $requestType = "deleteClubAccount";
-    // Permets de générer la page success 
+    // // Permets de générer la page success 
     require("src/views/ViewSuccessPage.php");
   }
 

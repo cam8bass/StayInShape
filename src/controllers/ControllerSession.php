@@ -12,6 +12,9 @@ use App\models\ModelErrorManagement\ErrorManagement;
 
 class Session
 {
+  protected  $dbh;
+  protected  $modelSession;
+  protected  $errorManagement;
 
   function __construct()
   {
@@ -37,10 +40,10 @@ class Session
 
     // Permets de rechercher un utilisateur grâce à l'email rentré
     $user = $this->modelSession->retrieveUserWithEmail($email) ?? '';
+
     //Permets de vérifier si le compte n’est pas désactivé et que l'adresse email est valide ainsi que le mot de passe 
     $errorUserLogin = $this->errorManagement->checkErrorUserLogin($password, $user);
     $errorIfUserAccount = $this->errorManagement->checkErrorIfUserAccount($user);
-
     if (empty(array_filter($errorTypeLogin, fn ($el) => $el !== '')) && empty(array_filter($errorUserLogin, fn ($el) => $el !== "")) && empty(array_filter($errorIfUserAccount, fn ($el) => $el !== ''))) {
       $this->modelSession->loginUser($errorUserLogin, $user);
 
@@ -89,7 +92,7 @@ class Session
         'use_only_cookies' => true,
         'cookie_lifetime' => 60 * 60 * 24 * 14,
         'cookie_httponly' => true,
-        "cookie_secure"=>true
+        "cookie_secure" => true
       ]);
       $_SESSION['currentUser'] = $currentUser ?? "";
       return $currentUser;

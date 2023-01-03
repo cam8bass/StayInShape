@@ -45,8 +45,7 @@ class FilterClub extends View {
   displayFilteredClub = function (profile) {
     this._clear();
     return `
-      <a href="../../index.php?status=on&action=showClubProfile&id=
-      ${profile.idClub} "
+      <a href="../../index.php?status=on&action=showClubProfile&id=${profile.idClub}"
        class="list__link">
 
         <div class="list__block

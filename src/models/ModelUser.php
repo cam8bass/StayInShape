@@ -110,7 +110,8 @@ class ModelUser extends Model
    */
   public function retrieveActicationKey(string $idClub)
   {
-    $statementRetrieveActivationKey = $this->dbh->connectDb()->prepare("SELECT numActive FROM club WHERE idClub=$idClub");
+    $statementRetrieveActivationKey = $this->dbh->connectDb()->prepare("SELECT numActive FROM club WHERE idClub=:idClub");
+    $statementRetrieveActivationKey->bindValue(":idClub", $idClub);
     $statementRetrieveActivationKey->execute();
     return $statementRetrieveActivationKey->fetch();
   }
@@ -121,7 +122,8 @@ class ModelUser extends Model
    */
   public function sendActivation(string $idClub)
   {
-    $statementSendActivationKey = $this->dbh->connectDb()->prepare("UPDATE club SET numActive=:activationKey WHERE idClub=$idClub");
+    $statementSendActivationKey = $this->dbh->connectDb()->prepare("UPDATE club SET numActive=:activationKey WHERE idClub=:idClub");
+    $statementSendActivationKey->bindValue(":idClub", "$idClub");
     $statementSendActivationKey->bindValue(":activationKey", "activated");
     return $statementSendActivationKey->execute();
   }
@@ -132,7 +134,8 @@ class ModelUser extends Model
    */
   public function accountActivation(string $idClub)
   {
-    $statementAccountActivation = $this->dbh->connectDb()->prepare("UPDATE user SET status=:active WHERE id=$idClub ");
+    $statementAccountActivation = $this->dbh->connectDb()->prepare("UPDATE user SET status=:active WHERE id=:idClub ");
+    $statementAccountActivation->bindValue(":idClub", $idClub);
     $statementAccountActivation->bindValue(':active', "enabled");
     $statementAccountActivation->execute();
   }
